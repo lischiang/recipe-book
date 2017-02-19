@@ -209,26 +209,66 @@ public partial class AddRecipe : System.Web.UI.Page
             }
 
             //test.Text = preparationTimeArray[0] + "h and " + preparationTimeArray[1] + "min";
-            if (CategoryText.Text == "")
+            //if (CategoryText.Text == "")
+            //{
+            //    test.Text = "empty string";
+            //}
+            //else
+            //{
+            //    test.Text = "something else string";
+            //}
+
+            /////////////////////////////////////////////////////////////////////////////////
+            //// Create the list of objects Ingredient
+
+            List<Ingredient> newListOfIngredients = new List<Ingredient>(); //new list of objects Ingredient
+            Ingredient newIngredient = new Ingredient();    //new object Ingredient used to store the element to add to the list
+
+            // IngredientWebUserControl0
+            if (IngredientWebUserControl0.Name != "")
             {
-                test.Text = "empty string";
+                newIngredient.Name = IngredientWebUserControl0.Name;
+                newIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl0.Quantity);
+                newIngredient.UnitOfMeasure = IngredientWebUserControl0.UnitOfMeasure;
+                newListOfIngredients.Add(newIngredient);
             }
-            else
+            // IngredientWebUserControl1
+            if (IngredientWebUserControl1.Name != "")
             {
-                test.Text = "something else string";
+                Ingredient newNewIngredient = new Ingredient();
+                newNewIngredient.Name = IngredientWebUserControl1.Name;
+                newNewIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl1.Quantity);
+                newNewIngredient.UnitOfMeasure = IngredientWebUserControl1.UnitOfMeasure;
+                newListOfIngredients.Add(newNewIngredient);
             }
-         
+            // IngredientWebUserControl2
+            if (IngredientWebUserControl2.Name != "")
+            {
+                newIngredient.Name = IngredientWebUserControl2.Name;
+                newIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl2.Quantity);
+                newIngredient.UnitOfMeasure = IngredientWebUserControl2.UnitOfMeasure;
+                newListOfIngredients.Add(newIngredient);
+            }
+            ///////////...................................
+
+
             ((List<Recipe>)Application["recipes"]).Add(new Recipe
             {
-                Name = NameRecipeText.Text,
+                NameRecipe = NameRecipeText.Text,
                 SubmittedBy = SubmittedByText.Text,
                 Category = CategoryText.Text,
                 PrepareTime = preparationTimeArray,
-                NumberOfServings = Convert.ToInt32(NumberOfServingsText.Text), // check if it is number
+                NumberOfServings = NumberOfServingsText.Text,
                 Description = RecipeDescriptionText.Text,
-
+                IngredientList = newListOfIngredients
             });
             //Response.Redirect("Default2.aspx");
+
+            test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
+            //test.Text = "1)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
+            //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(0).Name +
+            //    "2)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
+            //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(1).Name;
         }
 
 

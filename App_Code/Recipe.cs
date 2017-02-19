@@ -15,11 +15,11 @@ public class Recipe
         //
     }
 
-    private string name;            // name of the recipe
-    public string Name
+    private string nameRecipe;            // name of the recipe
+    public string NameRecipe
     {
-        get { return name; }
-        set { name = value; }
+        get { return nameRecipe; }
+        set { nameRecipe = value; }
     }
 
     private string submittedBy;        // name of the person that submitted the recipe
@@ -44,8 +44,8 @@ public class Recipe
         set { prepareTime = value; }
     }
 
-    private int numberOfServings;      // number of servings of the recipe                                 
-    public int NumberOfServings
+    private string numberOfServings;      // number of servings of the recipe                                 
+    public string NumberOfServings
     {
         get { return numberOfServings; }
         set { numberOfServings = value; }
