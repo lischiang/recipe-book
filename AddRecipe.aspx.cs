@@ -222,35 +222,173 @@ public partial class AddRecipe : System.Web.UI.Page
             //// Create the list of objects Ingredient
 
             List<Ingredient> newListOfIngredients = new List<Ingredient>(); //new list of objects Ingredient
-            Ingredient newIngredient = new Ingredient();    //new object Ingredient used to store the element to add to the list
 
             // IngredientWebUserControl0
             if (IngredientWebUserControl0.Name != "")
             {
-                newIngredient.Name = IngredientWebUserControl0.Name;
-                newIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl0.Quantity);
-                newIngredient.UnitOfMeasure = IngredientWebUserControl0.UnitOfMeasure;
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl0.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl0.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl0.UnitOfMeasure
+                };           
                 newListOfIngredients.Add(newIngredient);
             }
             // IngredientWebUserControl1
             if (IngredientWebUserControl1.Name != "")
             {
-                Ingredient newNewIngredient = new Ingredient();
-                newNewIngredient.Name = IngredientWebUserControl1.Name;
-                newNewIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl1.Quantity);
-                newNewIngredient.UnitOfMeasure = IngredientWebUserControl1.UnitOfMeasure;
-                newListOfIngredients.Add(newNewIngredient);
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl1.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl1.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl1.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
             }
             // IngredientWebUserControl2
             if (IngredientWebUserControl2.Name != "")
             {
-                newIngredient.Name = IngredientWebUserControl2.Name;
-                newIngredient.Quantity = Convert.ToDouble(IngredientWebUserControl2.Quantity);
-                newIngredient.UnitOfMeasure = IngredientWebUserControl2.UnitOfMeasure;
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl2.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl2.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl2.UnitOfMeasure
+                };
                 newListOfIngredients.Add(newIngredient);
             }
-            ///////////...................................
-
+            // IngredientWebUserControl3
+            if (IngredientWebUserControl3.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl3.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl3.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl3.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl4
+            if (IngredientWebUserControl4.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl4.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl4.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl4.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl5
+            if (IngredientWebUserControl5.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl5.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl5.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl5.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl6
+            if (IngredientWebUserControl6.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl6.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl6.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl6.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl7
+            if (IngredientWebUserControl7.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl7.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl7.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl7.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl8
+            if (IngredientWebUserControl8.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl8.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl8.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl8.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl9
+            if (IngredientWebUserControl9.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl9.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl9.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl9.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl10
+            if (IngredientWebUserControl10.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl10.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl10.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl10.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl11
+            if (IngredientWebUserControl11.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl11.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl11.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl11.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl12
+            if (IngredientWebUserControl12.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl12.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl12.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl12.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl13
+            if (IngredientWebUserControl13.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl13.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl13.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl13.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            // IngredientWebUserControl14
+            if (IngredientWebUserControl14.Name != "")
+            {
+                Ingredient newIngredient = new Ingredient
+                {
+                    Name = IngredientWebUserControl14.Name,
+                    Quantity = Convert.ToDouble(IngredientWebUserControl14.Quantity),
+                    UnitOfMeasure = IngredientWebUserControl14.UnitOfMeasure
+                };
+                newListOfIngredients.Add(newIngredient);
+            }
+            
 
             ((List<Recipe>)Application["recipes"]).Add(new Recipe
             {
@@ -264,7 +402,7 @@ public partial class AddRecipe : System.Web.UI.Page
             });
             //Response.Redirect("Default2.aspx");
 
-            test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
+            //test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
             //test.Text = "1)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
             //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(0).Name +
             //    "2)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +

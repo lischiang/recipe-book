@@ -239,10 +239,10 @@
                 <tr style="text-align: center">
                     <td colspan="3" style="display: flex">
                         <div style="margin-right: 10px">
-                            <asp:Button ID="Reset" runat="server" Text="Reset" Height="50" Width="150" />
+                            <asp:Button ID="Reset" runat="server" Text="Cancel" Height="50" Width="150" />
                         </div>
                         <div style="margin-left: 10px">
-                            <asp:Button ID="NewRecipeButton" runat="server" Text="Finished!" 
+                            <asp:Button ID="NewRecipeButton" runat="server" Text="Save" 
                                 Height="50" Width="150" OnClick="NewRecipeButton_Click" 
                                 ValidationGroup="MissingFields"/>
                         </div>
