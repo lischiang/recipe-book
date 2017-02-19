@@ -66,8 +66,19 @@ public partial class AddRecipe : System.Web.UI.Page
 
         //test.Text = preparationTimeArray[0] + "h and " + preparationTimeArray[1] + "min";
 
+        //////////////////////////////////////////////////////////////////////////
         // Save the ingredients inserted by the user in the Ingredient object
-        //
+
+        // IngredientWebUserControl0
+        if (IngredientWebUserControl0.Quantity != "" || 
+            IngredientWebUserControl0.UnitOfMeasure != "")
+        {
+            if (IngredientWebUserControl0.Name == "")
+            {
+
+            }
+        }
+
 
         //((List<Recipe>)Application["students"]).Add(new Recipe
         //{

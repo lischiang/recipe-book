@@ -2,7 +2,7 @@
 
 <table style="margin-left: auto; margin-right: auto; max-width: 200px">
     <tr style="vertical-align: bottom">
-        <td style="width: 40px; height: 20px">
+        <td>
             <asp:Label ID="LabelNameIngredient" runat="server" Text="Ingredient Name" Font-Size="X-Small"></asp:Label>
         </td>
         <td>
@@ -13,14 +13,50 @@
         </td>
     </tr>
     <tr>
-        <td style="width: 400px">
-            <asp:TextBox ID="NameIngredient" runat="server"></asp:TextBox>
+        <td style="width:300px">
+            <asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>
+            <asp:CustomValidator id="CustomValidatorNameIngredient"
+               ControlToValidate="NameIngredientText"
+               ClientValidationFunction="ClientValidate"
+               ErrorMessage="Missing ingredient name!"
+               Text="*" ForeColor="Red"
+               runat="server"
+               ValidationGroup="MissingFields"/>
+            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorNameIngredient" 
+                runat="server" ErrorMessage="Ingredient name missing" 
+                Text="*" ForeColor="Red"
+                ControlToValidate="NameIngredientText"
+                ValidationGroup="MissingFields"
+                ></asp:RequiredFieldValidator>--%>
         </td>
         <td>
-            <asp:TextBox ID="Quantity" runat="server" Width="50px"></asp:TextBox>
+            <asp:TextBox ID="QuantityText" runat="server" Width="50px"></asp:TextBox>
+
         </td>
         <td>
-            <asp:TextBox ID="UnitOfMeasure" runat="server"></asp:TextBox>
+            <asp:TextBox ID="UnitOfMeasureText" runat="server" Width="80px"></asp:TextBox>
         </td>
     </tr>
 </table>
+
+<script type="text/javascript">
+    function ClientValidate(s, args) {
+        <%--var nameTxt = document.getElementById("<%= NameIngredientText.ClientID %>").value;--%>
+        if (args.Value == "ciao") {
+            args.IsValid = true;
+        } else {
+            args.IsValid = false;
+        }
+        <%--if (nameTxt != "") {
+            if (document.getElementById("<%= QuantityText.ClientID %>").value != "" ||
+                document.getElementById("<%= UnitOfMeasureText.ClientID %>").value != "") {
+
+                args.IsValid = false;
+            }
+            else {
+                args.IsValid = true;
+            }
+        }--%>
+    }
+</script>
+

@@ -11,4 +11,22 @@ public partial class WebUserControl : System.Web.UI.UserControl
     {
 
     }
+
+    public string Name
+    {
+        get { return NameIngredientText.Text; }
+        set { NameIngredientText.Text = value; }
+    }
+
+    public string Quantity
+    {
+        get { return QuantityText.Text; }
+        set { QuantityText.Text = value; }
+    }
+
+    public string UnitOfMeasure
+    {
+        get { return UnitOfMeasureText.Text; }
+        set { UnitOfMeasureText.Text = value; }
+    }
 }
