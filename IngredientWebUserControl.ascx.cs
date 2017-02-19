@@ -12,9 +12,6 @@ public partial class WebUserControl : System.Web.UI.UserControl
 
     }
 
-    /// <summary>
-    /// // MAYBE NO NEED THIS
-    /// </summary>
     public string Name
     {
         get { return NameIngredientText.Text; }
