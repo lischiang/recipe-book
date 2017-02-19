@@ -60,41 +60,11 @@
                     </td>
                     <td>
                         <asp:TextBox ID="SubmittedByText" runat="server"></asp:TextBox>
-                        <asp:CustomValidator id="CustomValidator1"
-                           ControlToValidate="SubmittedByText"
-                           ClientValidationFunction="ClientValidate"
-                           ErrorMessage="Missing submitted by name!"
-                           Text="*" ForeColor="Red"
-                           runat="server"
-                           ValidationGroup="MissingFields"/>
-
-                        <script type="text/javascript">
-                            function ClientValidate(s, args) {
-                                args.IsValid = (args.Value.length > 2);
-
-                            <%--var nameTxt = document.getElementById("<%= NameIngredientText.ClientID %>").value;--%>
-                            //if (args.Value == "ciao") {
-                            //    args.IsValid = true;
-                            //} else {
-                            //    args.IsValid = false;
-                            //}
-                            <%--if (nameTxt != "") {
-                                if (document.getElementById("<%= QuantityText.ClientID %>").value != "" ||
-                                    document.getElementById("<%= UnitOfMeasureText.ClientID %>").value != "") {
-
-                                    args.IsValid = false;
-                                }
-                                else {
-                                    args.IsValid = true;
-                                }
-                            }--%>
-                            }
-                        </script>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorSubmittedBy" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorSubmittedBy" 
                         runat="server" ControlToValidate = "SubmittedByText" 
                         ErrorMessage="Name of the recipe author missing" Text="*"
                         ValidationGroup="MissingFields"
-                        SetFocusOnError ="true" ForeColor="Red"/>--%>
+                        SetFocusOnError ="true" ForeColor="Red"/>
                     </td>
                 </tr>
 
@@ -129,10 +99,11 @@
                     </td>
                     <td>
                         <asp:TextBox ID="NumberOfServingsText" runat="server"></asp:TextBox>
-                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorNumberOfServings" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorNumberOfServings" 
                         runat="server" ControlToValidate = "NumberOfServingsText" 
                         ErrorMessage="Number of servings missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>--%>
+                        ValidationGroup="MissingFields"
+                        SetFocusOnError ="true" ForeColor="Red"/>
                     </td>
                 </tr>
 
@@ -143,10 +114,11 @@
                     </td>
                     <td>
                         <asp:TextBox ID="RecipeDescriptionText" runat="server" Height="150px" Width="167.5px" TextMode ="MultiLine" style="margin-left: 0px"></asp:TextBox>
-                       <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidatorRecipeDescription" 
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorRecipeDescription" 
                         runat="server" ControlToValidate = "RecipeDescriptionText" 
                         ErrorMessage="Recipe description missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>--%>
+                           ValidationGroup="MissingFields"
+                        SetFocusOnError ="true" ForeColor="Red"/>
                     </td>   
                 </tr>
 

@@ -17,17 +17,11 @@
             <asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>
             <asp:CustomValidator id="CustomValidatorNameIngredient"
                ControlToValidate="NameIngredientText"
-               ClientValidationFunction="ClientValidate"
+               onservervalidate="IngredientIsIncomplete"
                ErrorMessage="Missing ingredient name!"
                Text="*" ForeColor="Red"
-               runat="server"
+               runat="server" ValidateEmptyText="True"
                ValidationGroup="MissingFields"/>
-            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorNameIngredient" 
-                runat="server" ErrorMessage="Ingredient name missing" 
-                Text="*" ForeColor="Red"
-                ControlToValidate="NameIngredientText"
-                ValidationGroup="MissingFields"
-                ></asp:RequiredFieldValidator>--%>
         </td>
         <td>
             <asp:TextBox ID="QuantityText" runat="server" Width="50px"></asp:TextBox>
@@ -38,25 +32,3 @@
         </td>
     </tr>
 </table>
-
-<script type="text/javascript">
-    function ClientValidate(s, args) {
-        <%--var nameTxt = document.getElementById("<%= NameIngredientText.ClientID %>").value;--%>
-        if (args.Value == "ciao") {
-            args.IsValid = true;
-        } else {
-            args.IsValid = false;
-        }
-        <%--if (nameTxt != "") {
-            if (document.getElementById("<%= QuantityText.ClientID %>").value != "" ||
-                document.getElementById("<%= UnitOfMeasureText.ClientID %>").value != "") {
-
-                args.IsValid = false;
-            }
-            else {
-                args.IsValid = true;
-            }
-        }--%>
-    }
-</script>
-

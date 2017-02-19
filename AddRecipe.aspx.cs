@@ -78,7 +78,7 @@ public partial class AddRecipe : System.Web.UI.Page
 
             }
         }
-
+ 
 
         //((List<Recipe>)Application["students"]).Add(new Recipe
         //{
@@ -90,6 +90,8 @@ public partial class AddRecipe : System.Web.UI.Page
         //    Description = RecipeDescriptionText.Text,
 
         //});
-        //Response.Redirect("Default2.aspx");
+        Response.Redirect("AddRecipe.aspx");
     }
+
+   
 }

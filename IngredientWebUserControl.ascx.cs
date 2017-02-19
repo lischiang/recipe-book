@@ -12,6 +12,9 @@ public partial class WebUserControl : System.Web.UI.UserControl
 
     }
 
+    /// <summary>
+    /// // MAYBE NO NEED THIS
+    /// </summary>
     public string Name
     {
         get { return NameIngredientText.Text; }
@@ -28,5 +31,24 @@ public partial class WebUserControl : System.Web.UI.UserControl
     {
         get { return UnitOfMeasureText.Text; }
         set { UnitOfMeasureText.Text = value; }
+    }
+
+    protected void IngredientIsIncomplete(object sender, ServerValidateEventArgs e)
+    {
+        if (QuantityText.Text != "" || UnitOfMeasureText.Text != "")
+        {
+            if (e.Value.Length != 0)
+            {
+                e.IsValid = true;
+            }
+            else
+            {
+                e.IsValid = false;
+            }
+        }
+        else
+        {
+            e.IsValid = true;
+        }
     }
 }
