@@ -30,7 +30,7 @@ public partial class WebUserControl : System.Web.UI.UserControl
         set { UnitOfMeasureText.Text = value; }
     }
 
-    protected void IngredientIsIncomplete(object sender, ServerValidateEventArgs e)
+    protected void IngredientValidity(object sender, ServerValidateEventArgs e)
     {
         if (QuantityText.Text != "" || UnitOfMeasureText.Text != "")
         {

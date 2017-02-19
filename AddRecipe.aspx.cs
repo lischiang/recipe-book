@@ -208,11 +208,17 @@ public partial class AddRecipe : System.Web.UI.Page
                     PrepareTimeMinutesDropDownList.SelectedValue);
             }
 
-            test.Text = preparationTimeArray[0] + "h and " + preparationTimeArray[1] + "min";
-
-
-
-            ((List<Recipe>)Application["students"]).Add(new Recipe
+            //test.Text = preparationTimeArray[0] + "h and " + preparationTimeArray[1] + "min";
+            if (CategoryText.Text == "")
+            {
+                test.Text = "empty string";
+            }
+            else
+            {
+                test.Text = "something else string";
+            }
+         
+            ((List<Recipe>)Application["recipes"]).Add(new Recipe
             {
                 Name = NameRecipeText.Text,
                 SubmittedBy = SubmittedByText.Text,

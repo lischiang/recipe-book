@@ -86,7 +86,7 @@
                     <td>
                         <asp:DropDownList ID="PrepareTimeHoursDropDownList" runat="server"></asp:DropDownList>
                         <asp:Label runat="server" Text="hours" Font-Size="X-Small"></asp:Label>
-                        &nbsp;
+                        &nbsp; &nbsp;
                         <asp:DropDownList ID="PrepareTimeMinutesDropDownList" runat="server"></asp:DropDownList>
                         <asp:Label runat="server" Text="minutes" Font-Size="X-Small"></asp:Label>
                     </td>

@@ -14,14 +14,20 @@
     </tr>
     <tr>
         <td style="width:300px">
-            <asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>
             <asp:CustomValidator id="CustomValidatorNameIngredient"
                ControlToValidate="NameIngredientText"
-               onservervalidate="IngredientIsIncomplete"
+               onservervalidate="IngredientValidity"
                ErrorMessage="Missing ingredient name!"
                Text="*" ForeColor="Red"
                runat="server" ValidateEmptyText="True"
                ValidationGroup="MissingFields"/>
+            <asp:RegularExpressionValidator id="RegularExpressionValidatorQuantityIsNumber" 
+                runat="server" controltovalidate="QuantityText" 
+                validationexpression="^\d*\.{0,1}\d+$" 
+                ErrorMessage="Quantity of ingredient must be a numeric value!"
+                Text="*" ForeColor="Red"
+                ValidationGroup="MissingFields"/>
+            <asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>
         </td>
         <td>
             <asp:TextBox ID="QuantityText" runat="server" Width="50px"></asp:TextBox>
