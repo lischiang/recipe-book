@@ -400,6 +400,7 @@ public partial class AddRecipe : System.Web.UI.Page
                 Description = RecipeDescriptionText.Text,
                 IngredientList = newListOfIngredients
             });
+
             //Response.Redirect("Default2.aspx");
 
             //test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
@@ -408,9 +409,11 @@ public partial class AddRecipe : System.Web.UI.Page
             //    "2)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
             //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(1).Name;
         }
-
-
     }
+    
 
-   
+    protected void Reset_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AddRecipe.aspx");
+    }
 }

@@ -233,15 +233,17 @@
                         <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl14" />
                     </td>  
                 </tr>
-
-                
-
+ 
                 <tr style="text-align: center">
                     <td colspan="3" style="display: flex">
                         <div style="margin-right: 10px">
-                            <asp:Button ID="Reset" runat="server" Text="Cancel" Height="50" Width="150" />
+                            <%--Reset button--%>
+                            <asp:Button ID="Reset" runat="server" 
+                                Text="Cancel" Height="50" Width="150" 
+                                CausesValidation="False" OnClick="Reset_Click" />
                         </div>
                         <div style="margin-left: 10px">
+                            <%--Save button--%>
                             <asp:Button ID="NewRecipeButton" runat="server" Text="Save" 
                                 Height="50" Width="150" OnClick="NewRecipeButton_Click" 
                                 ValidationGroup="MissingFields"/>
