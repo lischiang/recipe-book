@@ -23,7 +23,7 @@
                     </th>
                 </tr>
 
-                <asp:ValidationSummary 
+                <%--<asp:ValidationSummary 
                     ID="ValidationSummaryAddRecipe" 
                     runat="server" 
                     HeaderText="We cannot submit your recipe:" 
@@ -33,7 +33,7 @@
                     Width="450"
                     ForeColor="Red"
                     Font-Italic="true" Height="500px"
-                    />
+                    />--%>
 
                 <%--Name new recipe--%>
                 <tr>
@@ -42,10 +42,10 @@
                     </td>
                     <td>
                         <asp:textbox id="NameRecipeText" runat="server" CssClass="form-control span6"></asp:textbox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorNameRecipe" 
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorNameRecipe" 
                         runat="server" ControlToValidate = "NameRecipeText" 
                         ErrorMessage="Name of the recipe missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>
+                        SetFocusOnError ="true" ForeColor="Red"/>--%>
                     </td>
                     
                 </tr>
@@ -57,10 +57,10 @@
                     </td>
                     <td>
                         <asp:TextBox ID="SubmittedByText" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorSubmittedBy" 
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorSubmittedBy" 
                         runat="server" ControlToValidate = "SubmittedByText" 
                         ErrorMessage="Name of the recipe author missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>
+                        SetFocusOnError ="true" ForeColor="Red"/>--%>
                     </td>
                 </tr>
 
@@ -95,10 +95,10 @@
                     </td>
                     <td>
                         <asp:TextBox ID="NumberOfServingsText" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorNumberOfServings" 
+                        <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorNumberOfServings" 
                         runat="server" ControlToValidate = "NumberOfServingsText" 
                         ErrorMessage="Number of servings missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>
+                        SetFocusOnError ="true" ForeColor="Red"/>--%>
                     </td>
                 </tr>
 
@@ -109,10 +109,10 @@
                     </td>
                     <td>
                         <asp:TextBox ID="RecipeDescriptionText" runat="server" Height="150px" Width="167.5px" TextMode ="MultiLine" style="margin-left: 0px"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorRecipeDescription" 
+                       <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidatorRecipeDescription" 
                         runat="server" ControlToValidate = "RecipeDescriptionText" 
                         ErrorMessage="Recipe description missing" Text="*"
-                        SetFocusOnError ="true" ForeColor="Red"/>
+                        SetFocusOnError ="true" ForeColor="Red"/>--%>
                     </td>   
                 </tr>
 
