@@ -11,4 +11,20 @@ public partial class Search : System.Web.UI.Page
     {
         SearchText.Focus();
     }
+
+    // Set the theme
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        string theme = (string)Session["theme"];
+
+        if (theme != null)
+        {
+            Page.Theme = theme;
+        }
+        else
+        {
+            Page.Theme = "Light";
+        }
+    }
+
 }

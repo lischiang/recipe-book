@@ -13,6 +13,9 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
+    <p>
+        <a href="SetTheme.aspx">Change web site theme</a>
+    </p>
     <table style="max-width: 1000px; margin: auto">
         <tr style="height: 400px">
             <td>

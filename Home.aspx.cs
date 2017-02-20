@@ -11,4 +11,19 @@ public partial class Home : System.Web.UI.Page
     {
 
     }
+
+    // Set the theme
+    protected void Page_PreInit(object sender, EventArgs e)
+    {
+        string theme = (string)Session["theme"];
+
+        if (theme != null)
+        {
+            Page.Theme = theme;
+        }
+        else
+        {
+            Page.Theme = "Light";
+        }
+    }
 }
