@@ -401,7 +401,7 @@ public partial class AddRecipe : System.Web.UI.Page
                 IngredientList = newListOfIngredients
             });
 
-            //Response.Redirect("Default2.aspx");
+            Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
 
             //test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
             //test.Text = "1)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +

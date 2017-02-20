@@ -4,7 +4,6 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="headercontainermiddle">
@@ -16,7 +15,7 @@
     <%--Form to add a new recipe--%>
     <form runat="server" style="align-content: center">
         <div class="recipecontainer">
-            <table style="margin-left: auto; margin-right: auto; max-width: 1000px; max-height: none" class="auto-style5">
+            <table style="margin-left: auto; margin-right: auto; max-width: 1000px; max-height: none">
                 <tr>
                     <%--Header of the form--%>
                     <th colspan="3" style="height: 100px; align-content: flex-start; vertical-align: top">
