@@ -27,6 +27,7 @@ public class RecipeRepository
                 SubmittedBy = recipe.SubmittedBy,
                 PrepareTime = recipe.PrepareTime
             };
+            currentListOfRecipePreviews.Add(newRecipePreview);
         }
         return currentListOfRecipePreviews;
     }
