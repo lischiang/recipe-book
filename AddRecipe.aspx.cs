@@ -208,16 +208,6 @@ public partial class AddRecipe : System.Web.UI.Page
                     PrepareTimeMinutesDropDownList.SelectedValue);
             }
 
-            //test.Text = preparationTimeArray[0] + "h and " + preparationTimeArray[1] + "min";
-            //if (CategoryText.Text == "")
-            //{
-            //    test.Text = "empty string";
-            //}
-            //else
-            //{
-            //    test.Text = "something else string";
-            //}
-
             /////////////////////////////////////////////////////////////////////////////////
             //// Create the list of objects Ingredient
 
@@ -401,13 +391,7 @@ public partial class AddRecipe : System.Web.UI.Page
                 IngredientList = newListOfIngredients
             });
 
-            Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
-
-            //test.Text = ((List<Recipe>)Application["recipes"]).Count().ToString();
-            //test.Text = "1)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
-            //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(0).Name +
-            //    "2)" + ((List<Recipe>)Application["recipes"]).ElementAt(0).NameRecipe + "," +
-            //    ((List<Recipe>)Application["recipes"]).ElementAt(0).IngredientList.ElementAt(1).Name;
+            Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page   
         }
     }
     

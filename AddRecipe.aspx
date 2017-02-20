@@ -112,7 +112,9 @@
                         <asp:Label runat="server" Text="Recipe description:"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="RecipeDescriptionText" runat="server" Height="150px" Width="167.5px" TextMode ="MultiLine" style="margin-left: 0px"></asp:TextBox>
+                        <asp:TextBox ID="RecipeDescriptionText" runat="server" Height="150px" 
+                            Width="167.5px" TextMode ="MultiLine" 
+                            style="margin-left: 0px; max-width: 300px; max-height:350px"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorRecipeDescription" 
                         runat="server" ControlToValidate = "RecipeDescriptionText" 
                         ErrorMessage="Recipe description missing" Text="*"
@@ -125,10 +127,6 @@
                 <tr>
                     <td>
                         <asp:Label runat="server" Text="Ingredients:"></asp:Label>
-                        <%--REMOVE--%>
-                        <asp:TextBox ID="test" runat="server"></asp:TextBox>
-                        <%-- --%>
-
                     </td>
                     <td>
                         <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl0" />
@@ -251,16 +249,8 @@
                 </tr>
 
             </table>
-
-            <%--<div style="border: 3px solid #808080; max-width: 500px; margin-left:50px">
-                ...Sketch of the recipe under construction, updated every time an ingredient or a step is added...
-            </div>--%>
         </div>
     </form>
-
-
-
-    
 </asp:Content>
 
 

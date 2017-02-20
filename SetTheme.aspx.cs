@@ -9,7 +9,15 @@ public partial class SetTheme : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //string theme = (string)Session["theme"];
+        //if (theme != null)
+        //{
+        //    RadioButtonSetTheme.SelectedValue = (string)Session["theme"];
+        //}
+        //else
+        //{
+        //    RadioButtonSetTheme.SelectedValue = "Light";
+        //}      
     }
 
     // Set the theme
