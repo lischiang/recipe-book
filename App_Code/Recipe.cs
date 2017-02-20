@@ -36,9 +36,10 @@ public class Recipe
         set { category = value; }
     }
 
-    private int[] prepareTime;      // time of preparation/cooking of the recipe 
-                                        // (will be an array of lenght 2 {hours,minutes})
-    public int [] PrepareTime
+    private string prepareTime;      // time of preparation/cooking of the recipe 
+                                        // it will i the format Nh Mmin, where N is the numner of hours
+                                        // and M the number of minutes
+    public string PrepareTime
     {
         get { return prepareTime; }
         set { prepareTime = value; }

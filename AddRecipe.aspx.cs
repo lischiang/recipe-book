@@ -395,7 +395,7 @@ public partial class AddRecipe : System.Web.UI.Page
                 NameRecipe = NameRecipeText.Text,
                 SubmittedBy = SubmittedByText.Text,
                 Category = CategoryText.Text,
-                PrepareTime = preparationTimeArray,
+                PrepareTime = preparationTimeArray[0] + "h " + preparationTimeArray[1] + "min",
                 NumberOfServings = NumberOfServingsText.Text,
                 Description = RecipeDescriptionText.Text,
                 IngredientList = newListOfIngredients
