@@ -11,20 +11,20 @@
     <form runat="server">
         <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSourceRecipeRepository" GroupItemCount="3">
             <AlternatingItemTemplate>
-                <td runat="server" style="background-color:#FFF8DC;">NameRecipe:
+                <td runat="server" style="background-color:#FFF8DC;">Name Recipe:
                     <asp:Label ID="NameRecipeLabel" runat="server" Text='<%# Eval("NameRecipe") %>' />
-                    <br />SubmittedBy:
+                    <br />Submitted By:
                     <asp:Label ID="SubmittedByLabel" runat="server" Text='<%# Eval("SubmittedBy") %>' />
-                    <br />PrepareTime:
+                    <br />Prepare Time:
                     <asp:Label ID="PrepareTimeLabel" runat="server" Text='<%# Eval("PrepareTime") %>' />
                     <br /></td>
             </AlternatingItemTemplate>
             <EditItemTemplate>
-                <td runat="server" style="background-color:#008A8C;color: #FFFFFF;">NameRecipe:
+                <td runat="server" style="background-color:#008A8C;color: #FFFFFF;">Name Recipe:
                     <asp:TextBox ID="NameRecipeTextBox" runat="server" Text='<%# Bind("NameRecipe") %>' />
-                    <br />SubmittedBy:
+                    <br />Submitted By:
                     <asp:TextBox ID="SubmittedByTextBox" runat="server" Text='<%# Bind("SubmittedBy") %>' />
-                    <br />PrepareTime:
+                    <br />Prepare Time:
                     <asp:TextBox ID="PrepareTimeTextBox" runat="server" Text='<%# Bind("PrepareTime") %>' />
                     <br />
                     <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
@@ -35,7 +35,7 @@
             <EmptyDataTemplate>
                 <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
                     <tr>
-                        <td>No data was returned.</td>
+                        <td>The list of the recipes is still empty.</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -48,11 +48,11 @@
                 </tr>
             </GroupTemplate>
             <InsertItemTemplate>
-                <td runat="server" style="">NameRecipe:
+                <td runat="server" style="">Name Recipe:
                     <asp:TextBox ID="NameRecipeTextBox" runat="server" Text='<%# Bind("NameRecipe") %>' />
-                    <br />SubmittedBy:
+                    <br />Submitted By:
                     <asp:TextBox ID="SubmittedByTextBox" runat="server" Text='<%# Bind("SubmittedBy") %>' />
-                    <br />PrepareTime:
+                    <br />Prepare Time:
                     <asp:TextBox ID="PrepareTimeTextBox" runat="server" Text='<%# Bind("PrepareTime") %>' />
                     <br />
                     <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
@@ -61,11 +61,11 @@
                     <br /></td>
             </InsertItemTemplate>
             <ItemTemplate>
-                <td runat="server" style="background-color:#DCDCDC;color: #000000;">NameRecipe:
+                <td runat="server" style="background-color:#DCDCDC;color: #000000;">Name Recipe:
                     <asp:Label ID="NameRecipeLabel" runat="server" Text='<%# Eval("NameRecipe") %>' />
-                    <br />SubmittedBy:
+                    <br />Submitted By:
                     <asp:Label ID="SubmittedByLabel" runat="server" Text='<%# Eval("SubmittedBy") %>' />
-                    <br />PrepareTime:
+                    <br />Prepare Time:
                     <asp:Label ID="PrepareTimeLabel" runat="server" Text='<%# Eval("PrepareTime") %>' />
                     <br /></td>
             </ItemTemplate>
@@ -91,11 +91,11 @@
                 </table>
             </LayoutTemplate>
             <SelectedItemTemplate>
-                <td runat="server" style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">NameRecipe:
+                <td runat="server" style="background-color:#008A8C;font-weight: bold;color: #FFFFFF;">Name Recipe:
                     <asp:Label ID="NameRecipeLabel" runat="server" Text='<%# Eval("NameRecipe") %>' />
-                    <br />SubmittedBy:
+                    <br />Submitted By:
                     <asp:Label ID="SubmittedByLabel" runat="server" Text='<%# Eval("SubmittedBy") %>' />
-                    <br />PrepareTime:
+                    <br />Prepare Time:
                     <asp:Label ID="PrepareTimeLabel" runat="server" Text='<%# Eval("PrepareTime") %>' />
                     <br /></td>
             </SelectedItemTemplate>
