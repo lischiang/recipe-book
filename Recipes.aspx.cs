@@ -64,20 +64,6 @@ public partial class Recipes : System.Web.UI.Page
         }
     }
 
-    //protected void GridViewRecipes_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    BindDetails();
-    //    Response.Redirect("RecipeDetails.aspx"); // redirect to the recipe detail page
-    //}
-    //private void BindDetails()
-    //{
-    //    // Obtain the index of the selected row
-    //    int selectedRowIndex = GridViewRecipes.SelectedIndex;
-    //    Application["indRecipeViewDetails"] = selectedRowIndex;
-
-
-    //}
-
     protected void GridViewRecipes_SelectedIndexChanged(object sender, EventArgs e)
     {
         BindDetails();

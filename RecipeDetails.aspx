@@ -8,6 +8,10 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-    
+    <form runat="server">
+        <asp:DetailsView ID="RecipeDetailView" runat="server" Height="50px" Width="125px">
+
+        </asp:DetailsView>
+    </form>
 </asp:Content>
 
