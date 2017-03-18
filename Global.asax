@@ -7,6 +7,9 @@
         // Code that runs on application startup
         List<Recipe> recipes = new List<Recipe>();
         Application["recipes"] = recipes;       // application variable: list of the recipes
+
+        int indRecipeViewDetails = -1;
+        Application["indRecipeViewDetails"] = indRecipeViewDetails;
     }
     
     void Application_End(object sender, EventArgs e) 
