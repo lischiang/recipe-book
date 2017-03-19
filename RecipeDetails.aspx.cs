@@ -35,22 +35,6 @@ public partial class RecipeDetails : System.Web.UI.Page
         comm.Parameters.Add("idRecipe", SqlDbType.Int);
         comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
 
-
-
-
-        //var IngredientGridView = RecipeDetailView.FindControl("IngredientsGridView") as GridView;
-        //Label label = (Label)RecipeDetailView.FindControl("label");
-        //if(label != null)
-        //{
-        //    label.Text = "trovato";
-        //}
-        //else
-        //{
-        //    Label1.Text = "not found";
-        //}
-
-
-
         // Enclose database code in Try-Catch-Finally
         try
         {
@@ -62,15 +46,47 @@ public partial class RecipeDetails : System.Web.UI.Page
             // Fill the grid with data
             RecipeDetailView.DataSource = reader;
             RecipeDetailView.DataBind();
-
             // Close the reader
             reader.Close();
+
+            GridView IngredientGridView = (GridView)RecipeDetailView.FindControl("IngredientsGridView");
+            if (IngredientGridView != null)
+            {
+                comm = new SqlCommand(
+                      "SELECT Quantity, UnitName, IngredientName " +
+                      "FROM RB_RecipeIngredient, RB_MeasureUnit, RB_Ingredient " +
+                      "WHERE (idRecipe=@idRecipe AND " +
+                      "RB_RecipeIngredient.idIngredient = RB_Ingredient.idIngredient AND " +
+                      "RB_RecipeIngredient.idUnit = RB_MeasureUnit.idUnit)", conn);
+                // Add the EmployeeID parameter
+                comm.Parameters.Add("idRecipe", SqlDbType.Int);
+                comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
+
+                // Enclose database code in Try-Catch-Finally
+                try
+                {
+                    // Execute the command
+                    reader = comm.ExecuteReader();
+
+                    // Fill the grid with data
+                    IngredientGridView.DataSource = reader;
+                    IngredientGridView.DataBind();
+                    // Close the reader
+                    reader.Close();
+                }
+                finally
+                {
+                    // Close the connection
+                    conn.Close();
+                }
+
+            }
         }
         finally
         {
             // Close the connection
             conn.Close();
-        }
+        }  
     }
 
     protected void Page_PreInit(object sender, EventArgs e)
