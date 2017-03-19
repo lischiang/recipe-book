@@ -13,13 +13,21 @@
             <Fields>
                 <asp:BoundField DataField="PrepareMinutes" HeaderText="Preparation Time" />
                 <asp:BoundField DataField="NumberServings" HeaderText="Number of Servings" />
-                <asp:BoundField DataField="RecipeDescription" HeaderText="Directions" />
+               <%-- <asp:TemplateField HeaderText="Ingredients">
+                    <ItemTemplate> --%>
+                        <%--<asp:GridView ID="IngredientsGridView" runat="server"></asp:GridView>--%>
+                        <%--<asp:Label ID="label" Runat="Server" Text="nulla"/>
+                    </ItemTemplate>
+                </asp:TemplateField>--%>
+                <asp:BoundField DataField="RecipeDescription" HeaderText="Directions" />    
             </Fields>
             <HeaderStyle Font-Bold="true" Font-Size="Larger" Height="70px" HorizontalAlign="Center"/>
             <HeaderTemplate>
                 <%#Eval("RecipeName")%>
             </HeaderTemplate>
+            
         </asp:DetailsView>
+        <%--<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>--%>
     </form>
 </asp:Content>
 

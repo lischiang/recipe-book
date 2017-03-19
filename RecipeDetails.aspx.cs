@@ -35,6 +35,22 @@ public partial class RecipeDetails : System.Web.UI.Page
         comm.Parameters.Add("idRecipe", SqlDbType.Int);
         comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
 
+
+
+
+        //var IngredientGridView = RecipeDetailView.FindControl("IngredientsGridView") as GridView;
+        //Label label = (Label)RecipeDetailView.FindControl("label");
+        //if(label != null)
+        //{
+        //    label.Text = "trovato";
+        //}
+        //else
+        //{
+        //    Label1.Text = "not found";
+        //}
+
+
+
         // Enclose database code in Try-Catch-Finally
         try
         {
@@ -42,9 +58,11 @@ public partial class RecipeDetails : System.Web.UI.Page
             conn.Open();
             // Execute the command
             reader = comm.ExecuteReader();
+
             // Fill the grid with data
             RecipeDetailView.DataSource = reader;
             RecipeDetailView.DataBind();
+
             // Close the reader
             reader.Close();
         }
