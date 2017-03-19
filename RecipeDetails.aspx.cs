@@ -34,6 +34,9 @@ public partial class RecipeDetails : System.Web.UI.Page
         // Add the EmployeeID parameter
         comm.Parameters.Add("idRecipe", SqlDbType.Int);
         comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
+
+        prova.Text = Application["indRecipeViewDetails"].ToString();
+
         // Enclose database code in Try-Catch-Finally
         try
         {
@@ -43,7 +46,6 @@ public partial class RecipeDetails : System.Web.UI.Page
             reader = comm.ExecuteReader();
             // Fill the grid with data
             RecipeDetailView.DataSource = reader;
-            RecipeDetailView.DataKeyNames = new string[] { "EmployeeID" };
             RecipeDetailView.DataBind();
             // Close the reader
             reader.Close();

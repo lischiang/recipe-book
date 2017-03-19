@@ -44,7 +44,7 @@ public partial class Recipes : System.Web.UI.Page
 
         // Create command 
         comm = new SqlCommand(
-            "SELECT RecipeName, UserName, PrepareMinutes " +
+            "SELECT idRecipe, RecipeName, UserName, PrepareMinutes " +
             "FROM RB_Recipe, RB_User " +
             "WHERE RB_Recipe.idUser = RB_User.idUser" , conn);
 
@@ -54,6 +54,7 @@ public partial class Recipes : System.Web.UI.Page
             conn.Open();
             reader = comm.ExecuteReader();
             GridViewRecipes.DataSource = reader;
+            GridViewRecipes.DataKeyNames = new string[] { "idRecipe" };
             GridViewRecipes.DataBind();
             reader.Close();
         }
@@ -74,8 +75,6 @@ public partial class Recipes : System.Web.UI.Page
     {
         // Obtain the index of the selected row
         int selectedRowIndex = GridViewRecipes.SelectedIndex;
-        Application["indRecipeViewDetails"] = selectedRowIndex;
-
-
+        Application["indRecipeViewDetails"] = (int)GridViewRecipes.DataKeys[selectedRowIndex].Value;
     }
 }
