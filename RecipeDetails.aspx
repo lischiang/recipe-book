@@ -9,8 +9,16 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
     <form runat="server">
-        <asp:DetailsView ID="RecipeDetailView" runat="server" Height="50px" Width="125px">
-
+        <asp:DetailsView ID="RecipeDetailView" runat="server" Height="50px" Width="700px" AutoGenerateRows="False">
+            <Fields>
+                <asp:BoundField DataField="PrepareMinutes" HeaderText="Preparation Time" />
+                <asp:BoundField DataField="NumberServings" HeaderText="Number of Servings" />
+                <asp:BoundField DataField="RecipeDescription" HeaderText="Directions" />
+            </Fields>
+            <HeaderStyle Font-Bold="true" Font-Size="Larger" Height="70px" HorizontalAlign="Center"/>
+            <HeaderTemplate>
+                <%#Eval("RecipeName")%>
+            </HeaderTemplate>
         </asp:DetailsView>
     </form>
 </asp:Content>

@@ -35,8 +35,6 @@ public partial class RecipeDetails : System.Web.UI.Page
         comm.Parameters.Add("idRecipe", SqlDbType.Int);
         comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
 
-        prova.Text = Application["indRecipeViewDetails"].ToString();
-
         // Enclose database code in Try-Catch-Finally
         try
         {
