@@ -18,17 +18,22 @@
                 </tr>
                 <tr>
                     <td style="align-content: flex-start; vertical-align: top">
-                        <asp:TextBox ID="SearchText" runat="server" Width="300pt"></asp:TextBox>
+                        <%--<asp:TextBox ID="SearchText" runat="server" Width="300pt"></asp:TextBox>--%>
                         <asp:Button ID="SearchButton" runat="server" Text="Search" Height="30" Width="120" />
                     </td>
                 </tr>
                 <tr>
                     <td style="vertical-align: top">Filter by category:
+                        <asp:DropDownList ID="SubmittedByDropDownList" runat="server"></asp:DropDownList>
                         <asp:DropDownList ID="CategoriesDropDownList" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="IngrediensDropDownList" runat="server"></asp:DropDownList>
                     </td>
                 </tr>
 
             </table>
+        </div>
+        <div>
+            <asp:Label ID="messageLabel" runat="server" Text=""></asp:Label>
         </div>
     </form>
 </asp:Content>
