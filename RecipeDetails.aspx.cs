@@ -102,4 +102,42 @@ public partial class RecipeDetails : System.Web.UI.Page
             Page.Theme = "Light";
         }
     }
+
+
+    protected void DeleteRecipeButton_Click(object sender, EventArgs e)
+    {
+        // Define data objects
+        SqlConnection conn;
+        SqlCommand comm;
+        SqlDataReader reader;
+        // Read the connection string from Web.config
+        string connectionString =
+            ConfigurationManager.ConnectionStrings["RB_RecipeBook"].ConnectionString;
+        // Initialize connection
+        conn = new SqlConnection(connectionString);
+        // Create command
+        comm = new SqlCommand("DELETE FROM RB_RecipeIngredient WHERE idRecipe=@idRecipe; " +
+            "DELETE FROM RB_Recipe WHERE idRecipe = @idRecipe", conn);
+        // Add the EmployeeID parameter
+        comm.Parameters.Add("idRecipe", SqlDbType.Int);
+        comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
+
+        // Enclose database code in Try-Catch-Finally
+        try
+        {
+            // Open the connection
+            conn.Open();
+            // Execute the command
+            reader = comm.ExecuteReader();
+            // Close the reader
+            reader.Close();
+        }
+        finally
+        {
+            // Close the connection
+            conn.Close();
+        }
+
+        Response.Redirect("ConfirmationDeleteRecipe.aspx"); // redirect to the recipe detail page
+    }
 }
