@@ -58,7 +58,7 @@ public partial class RecipeDetails : System.Web.UI.Page
                       "WHERE (idRecipe=@idRecipe AND " +
                       "RB_RecipeIngredient.idIngredient = RB_Ingredient.idIngredient AND " +
                       "RB_RecipeIngredient.idUnit = RB_MeasureUnit.idUnit)", conn);
-                // Add the EmployeeID parameter
+                // Add the idRecipe parameter
                 comm.Parameters.Add("idRecipe", SqlDbType.Int);
                 comm.Parameters["idRecipe"].Value = (int)Application["indRecipeViewDetails"];
 
