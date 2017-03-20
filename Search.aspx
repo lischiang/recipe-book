@@ -54,8 +54,10 @@
         &nbsp;
         &nbsp;
         <div>
-            <asp:GridView ID="GridViewSearchResult" runat="server" AutoGenerateColumns="False" 
-                OnSelectedIndexChanged="GridViewSearchResult_SelectedIndexChanged" Visible="False">
+            <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
+        </div>
+        <div>
+            <asp:GridView ID="GridViewSearchResult" runat="server" AutoGenerateColumns="False" Visible="False">
                 <Columns>
                 <asp:BoundField DataField="RecipeName" HeaderText="Title" />
                 <asp:BoundField DataField="UserName" HeaderText="Submitted by" />

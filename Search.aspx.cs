@@ -62,7 +62,7 @@ public partial class Search : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    messageLabel.Text = "ERROR: " + ex.Message;
+                    MessageLabel.Text = "ERROR: " + ex.Message;
                 }
             }
         }
@@ -101,7 +101,9 @@ public partial class Search : System.Web.UI.Page
                 if (IngredientsDropDownList.SelectedIndex == 0)
                 {
                     // Create command for all the recipes
-                    comm = new SqlCommand("SELECT * FROM RB_Recipe", conn);
+                    comm = new SqlCommand("SELECT  RecipeName, UserName, PrepareMinutes " +
+                        "FROM RB_Recipe, RB_User " +
+                        "WHERE RB_Recipe.idUser = RB_User.idUser", conn);
                 }
                 else
                 {
@@ -226,6 +228,8 @@ public partial class Search : System.Web.UI.Page
         // Enclose database code in Try-Catch-Finally
         try
         {
+            // Open the connection
+            conn.Open();
             // Execute the command
             reader = comm.ExecuteReader();
 
