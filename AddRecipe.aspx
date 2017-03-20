@@ -250,6 +250,7 @@
 
             </table>
         </div>
+        <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
     </form>
 </asp:Content>
 

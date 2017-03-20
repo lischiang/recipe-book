@@ -15,26 +15,39 @@
     <tr>
         <td style="width:300px">
             <asp:CustomValidator id="CustomValidatorNameIngredient"
-               ControlToValidate="NameIngredientText"
+               ControlToValidate="DropDownListNameIngredient"
                onservervalidate="IngredientValidity"
                ErrorMessage="Missing ingredient name!"
+                InitialValue="--Select ingredient--"
                Text="*" ForeColor="Red"
                runat="server" ValidateEmptyText="True"
                ValidationGroup="MissingFields"/>
+            <%--<asp:RequiredFieldValidator ID="RequiredFieldValidatorIngredientName" runat="server" 
+                ControlToValidate="DropDownListNameIngredient"
+                onservervalidate="IngredientValidity"
+                ErrorMessage="Select the name of the Ingredient." 
+                InitialValue="--Select ingredient--"
+                Text="*" ForeColor="Red"
+                ValidationGroup="MissingFields"/>--%>
+            <%--InitialValue="--Select ingredient--"--%>
+
             <asp:RegularExpressionValidator id="RegularExpressionValidatorQuantityIsNumber" 
                 runat="server" controltovalidate="QuantityText" 
                 validationexpression="^\d*\.{0,1}\d+$" 
                 ErrorMessage="Quantity of ingredient must be a numeric value!"
                 Text="*" ForeColor="Red"
                 ValidationGroup="MissingFields"/>
-            <asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>
+            <%--<asp:TextBox ID="NameIngredientText" runat="server" Width="100px"></asp:TextBox>--%>
+            <asp:DropDownList ID="DropDownListNameIngredient" runat="server"></asp:DropDownList>
         </td>
         <td>
             <asp:TextBox ID="QuantityText" runat="server" Width="50px"></asp:TextBox>
 
         </td>
         <td>
-            <asp:TextBox ID="UnitOfMeasureText" runat="server" Width="80px"></asp:TextBox>
+            <%--<asp:TextBox ID="UnitOfMeasureText" runat="server" Width="80px"></asp:TextBox>--%>
+            <asp:DropDownList ID="DropDownListUnitOfMeasure" runat="server"></asp:DropDownList>
         </td>
     </tr>
 </table>
+<asp:Label ID="MessageLabel" runat="server" Text="" Visible="false"></asp:Label>

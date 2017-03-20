@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,13 +12,20 @@ public partial class WebUserControl : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
 
     }
 
-    public string Name
+    public string IndexName
     {
-        get { return NameIngredientText.Text; }
-        set { NameIngredientText.Text = value; }
+        get { return DropDownListNameIngredient.SelectedValue; }
+        set { DropDownListNameIngredient.SelectedValue = value; }
+    }
+
+    public DropDownList DDLName
+    {
+        get { return DropDownListNameIngredient; }
+        set { DropDownListNameIngredient = value; }
     }
 
     public string Quantity
@@ -24,17 +34,22 @@ public partial class WebUserControl : System.Web.UI.UserControl
         set { QuantityText.Text = value; }
     }
 
-    public string UnitOfMeasure
+    public string IndexUnitOfMeasure
     {
-        get { return UnitOfMeasureText.Text; }
-        set { UnitOfMeasureText.Text = value; }
+        get { return DropDownListUnitOfMeasure.SelectedValue; }
+        set { DropDownListUnitOfMeasure.SelectedValue = value; }
+    }
+    public DropDownList DDLUnit
+    {
+        get { return DropDownListUnitOfMeasure; }
+        set { DropDownListUnitOfMeasure = value; }
     }
 
     protected void IngredientValidity(object sender, ServerValidateEventArgs e)
     {
-        if (QuantityText.Text != "" || UnitOfMeasureText.Text != "")
+        if (QuantityText.Text != "" || DropDownListUnitOfMeasure.SelectedIndex != 0)
         {
-            if (e.Value.Length != 0)
+            if(DropDownListNameIngredient.SelectedIndex != 0)
             {
                 e.IsValid = true;
             }
@@ -48,4 +63,6 @@ public partial class WebUserControl : System.Web.UI.UserControl
             e.IsValid = true;
         }
     }
+
+
 }
