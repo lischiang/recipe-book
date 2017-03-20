@@ -15,7 +15,7 @@
                 <asp:BoundField DataField="RecipeName" HeaderText="Title" />
                 <asp:BoundField DataField="UserName" HeaderText="Submitted by" />
                 <asp:BoundField DataField="PrepareMinutes" HeaderText="Preparation time" />
-                <%--<asp:ButtonField CommandName="Select" Text="View Recipe Details" />--%>
+                <asp:ButtonField CommandName="Select" Text="View Recipe Details" />
                 </Columns>
         </asp:GridView>
     </form>

@@ -48,16 +48,19 @@
                         <asp:Button ID="SearchButton" runat="server" Text="Search" Height="30" Width="120" OnClick="SearchButton_Click" />
                     </td>
                 </tr>
+                <tr style="text-align: center">
+                    <td colspan="3">
+                        <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
+                    </td>
+                </tr>
 
             </table>
         </div>
-        &nbsp;
-        &nbsp;
+       
         <div>
-            <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
-        </div>
-        <div>
-            <asp:GridView ID="GridViewSearchResult" runat="server" AutoGenerateColumns="False" Visible="False">
+            <asp:Label ID="ResultLabel" runat="server" Text="Results:" Visible="false" Font-Size="Large"></asp:Label>
+            <asp:GridView ID="GridViewSearchResult" runat="server" AutoGenerateColumns="False" Visible="False"
+                OnSelectedIndexChanged="GridViewSearchResult_SelectedIndexChanged">
                 <Columns>
                 <asp:BoundField DataField="RecipeName" HeaderText="Title" />
                 <asp:BoundField DataField="UserName" HeaderText="Submitted by" />

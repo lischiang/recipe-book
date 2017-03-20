@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -378,9 +380,8 @@ public partial class AddRecipe : System.Web.UI.Page
                 };
                 newListOfIngredients.Add(newIngredient);
             }
-            
 
-            ((List<Recipe>)Application["recipes"]).Add(new Recipe
+            Recipe newRecipe = new Recipe
             {
                 NameRecipe = NameRecipeText.Text,
                 SubmittedBy = SubmittedByText.Text,
@@ -389,7 +390,28 @@ public partial class AddRecipe : System.Web.UI.Page
                 NumberOfServings = NumberOfServingsText.Text,
                 Description = RecipeDescriptionText.Text,
                 IngredientList = newListOfIngredients
-            });
+            };
+
+            ((List<Recipe>)Application["recipes"]).Add(newRecipe);
+
+            //// Create connnection to RB_RecipeBook database
+            //SqlConnection conn;
+            //SqlCommand comm;
+            //SqlDataReader reader;
+            //// Read the connection string from Web.config
+            //string connectionString =
+            //    ConfigurationManager.ConnectionStrings["RB_RecipeBook"].ConnectionString;
+            //conn = new SqlConnection(connectionString);
+
+            //// Create sql command with insert statement
+            //comm = new SqlCommand(
+            //    "INSERT INTO RB_Recipe (RecipeName, PrepareMinutes, NumberServings, " + 
+            //    "RecipeDescription, idCategory, idUser)" + 
+            //    "VALUES(@RecipeName, @@PrepareMinutes, @NumberServings, " + 
+            //    "@RecipeDescription, @idCategory, @idUser);", conn);
+            //comm.Parameters.Add("@EmployeeID", System.Data.SqlDbType.Int);
+            //comm.Parameters["@EmployeeID"].Value = 5;
+
 
             Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page   
         }

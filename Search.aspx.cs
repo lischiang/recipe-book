@@ -101,7 +101,7 @@ public partial class Search : System.Web.UI.Page
                 if (IngredientsDropDownList.SelectedIndex == 0)
                 {
                     // Create command for all the recipes
-                    comm = new SqlCommand("SELECT  RecipeName, UserName, PrepareMinutes " +
+                    comm = new SqlCommand("SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser", conn);
                 }
@@ -109,7 +109,7 @@ public partial class Search : System.Web.UI.Page
                 {
                     // Create command for recipes specified ingredient
                     comm = new SqlCommand(
-                        "SELECT RecipeName, UserName, PrepareMinutes " +
+                        "SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_RecipeIngredient " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_RecipeIngredient.idRecipe = RB_Recipe.idRecipe AND " +
@@ -125,7 +125,7 @@ public partial class Search : System.Web.UI.Page
                 {
                     // Create command for recipes specified category
                     comm = new SqlCommand(
-                        "SELECT RecipeName, UserName, PrepareMinutes " +
+                        "SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_Category " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_Category.idCategory = RB_Recipe.idCategory AND " +
@@ -138,7 +138,7 @@ public partial class Search : System.Web.UI.Page
                 {
                     // Create command for recipes specified category and ingredient
                     comm = new SqlCommand(
-                        "SELECT RecipeName, UserName, PrepareMinutes " +
+                        "SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_RecipeIngredient, RB_Category " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_RecipeIngredient.idRecipe = RB_Recipe.idRecipe AND " +
@@ -160,7 +160,7 @@ public partial class Search : System.Web.UI.Page
                 if (IngredientsDropDownList.SelectedIndex == 0)
                 {
                     // Create command for recipes specified User
-                    comm = new SqlCommand("SELECT RecipeName, UserName, PrepareMinutes " +
+                    comm = new SqlCommand("SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_Recipe.idUser=@idUser", conn);
@@ -172,7 +172,7 @@ public partial class Search : System.Web.UI.Page
                 {
                     // Create command for recipes specified user and ingredient
                     comm = new SqlCommand(
-                        "SELECT RecipeName, UserName, PrepareMinutes " +
+                        "SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_RecipeIngredient " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_RecipeIngredient.idRecipe = RB_Recipe.idRecipe AND " +
@@ -190,7 +190,7 @@ public partial class Search : System.Web.UI.Page
                 if (IngredientsDropDownList.SelectedIndex == 0)
                 {
                     // Create command for recipes specified User and category
-                    comm = new SqlCommand("SELECT RecipeName, UserName, PrepareMinutes " +
+                    comm = new SqlCommand("SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_Category " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_Category.idCategory = RB_Recipe.idCategory AND " +
@@ -206,7 +206,7 @@ public partial class Search : System.Web.UI.Page
                 {
                     // Create command for recipes specified user, category, and ingredient
                     comm = new SqlCommand(
-                        "SELECT RecipeName, UserName, PrepareMinutes " +
+                        "SELECT RB_Recipe.idRecipe, RecipeName, UserName, PrepareMinutes " +
                         "FROM RB_Recipe, RB_User, RB_RecipeIngredient, RB_Category " +
                         "WHERE RB_Recipe.idUser = RB_User.idUser AND " +
                         "RB_Category.idCategory = RB_Recipe.idCategory AND " +
@@ -235,8 +235,12 @@ public partial class Search : System.Web.UI.Page
 
             // Fill the grid with data
             GridViewSearchResult.DataSource = reader;
+            GridViewSearchResult.DataKeyNames = new string[] { "idRecipe" };
             GridViewSearchResult.DataBind();
             GridViewSearchResult.Visible = true;
+
+            // Show header of the gridview containing the result of the search
+            ResultLabel.Visible = true;
 
             // Close the reader
             reader.Close();
@@ -246,5 +250,18 @@ public partial class Search : System.Web.UI.Page
             // Close the connection
             conn.Close();
         }
+    }
+
+    protected void GridViewSearchResult_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        BindDetails();
+        Response.Redirect("RecipeDetails.aspx"); // redirect to the recipe detail page
+    }
+
+    private void BindDetails()
+    {
+        // Obtain the index of the selected row
+        int selectedRowIndex = GridViewSearchResult.SelectedIndex;
+        Application["indRecipeViewDetails"] = (int)GridViewSearchResult.DataKeys[selectedRowIndex].Value;
     }
 }
