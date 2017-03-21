@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Lisa Chiang, student number 300925122
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -264,4 +265,6 @@ public partial class Search : System.Web.UI.Page
         int selectedRowIndex = GridViewSearchResult.SelectedIndex;
         Application["indRecipeViewDetails"] = (int)GridViewSearchResult.DataKeys[selectedRowIndex].Value;
     }
+
+    //Lisa Chiang, student number 300925122
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Lisa Chiang, student number 300925122
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -89,6 +90,7 @@ public partial class RecipeDetails : System.Web.UI.Page
         }  
     }
 
+    // Lisa Chiang, student number 300925122
     protected void Page_PreInit(object sender, EventArgs e)
     {
         string theme = (string)Session["theme"];
@@ -140,4 +142,5 @@ public partial class RecipeDetails : System.Web.UI.Page
 
         Response.Redirect("ConfirmationDeleteRecipe.aspx"); // redirect to the recipe detail page
     }
+    // Lisa Chiang, student number 300925122
 }

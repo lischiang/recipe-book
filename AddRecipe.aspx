@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddRecipe.aspx.cs" Inherits="AddRecipe" %>
+﻿<%--Lisa Chiang, student number 300925122--%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="AddRecipe.aspx.cs" Inherits="AddRecipe" %>
 
 <%@ Register Src="~/IngredientWebUserControl.ascx" TagPrefix="uc1" TagName="IngredientWebUserControl" %>
-
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -73,7 +73,8 @@
                         <asp:Label runat="server" Text="Category:"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="CategoryText" runat="server"></asp:TextBox>
+                        <%--<asp:TextBox ID="CategoryText" runat="server"></asp:TextBox>--%>
+                        <asp:DropDownList ID="DropDownListCategory" runat="server"></asp:DropDownList>
                     </td>
                 </tr>
 
@@ -251,6 +252,8 @@
             </table>
         </div>
         <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
     </form>
 </asp:Content>
 

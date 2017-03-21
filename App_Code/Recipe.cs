@@ -29,11 +29,11 @@ public class Recipe
         set { submittedBy = value; }
     }
 
-    private string category;   // category of the recipe
-    public string Category
+    private string indexCategory;   // category of the recipe
+    public string IndexCategory
     {
-        get { return category; }
-        set { category = value; }
+        get { return indexCategory; }
+        set { indexCategory = value; }
     }
 
     private string prepareTime;      // time of preparation/cooking of the recipe 
@@ -45,8 +45,8 @@ public class Recipe
         set { prepareTime = value; }
     }
 
-    private string numberOfServings;      // number of servings of the recipe                                 
-    public string NumberOfServings
+    private int numberOfServings;      // number of servings of the recipe                                 
+    public int NumberOfServings
     {
         get { return numberOfServings; }
         set { numberOfServings = value; }
@@ -65,5 +65,7 @@ public class Recipe
         get { return ingredientList; }
         set { ingredientList = value; }
     }
+
+
 
 }

@@ -10,6 +10,9 @@
 
         int indRecipeViewDetails = -1;
         Application["indRecipeViewDetails"] = indRecipeViewDetails;
+
+        int idCurrentUser = 1; // this value needs to be updated at the login of a certain user. Set to 1 for example
+        Application["idCurrentUser"] = idCurrentUser;
     }
     
     void Application_End(object sender, EventArgs e) 
