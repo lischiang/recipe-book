@@ -15,15 +15,12 @@
             BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical"
             DataSourceID="recipeDataSource" 
             DataKeyNames="idRecipe" onmodechanging="RecipeDetailView_ModeChanging">
-             <%--OnItemUpdating="RecipeDetailView_ItemUpdating">--%>
-             <%--OnItemUpdated="RecipeDetailView_ItemUpdated">--%>
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <EditRowStyle BackColor="#c1c1d7" Font-Bold="True" ForeColor="White" />
             <FieldHeaderStyle Font-Bold="True"/>
             <Fields>
                 <asp:TemplateField HeaderText="Category">
                     <EditItemTemplate>
-                        <%--<asp:TextBox ID="editCategoryTextBox" runat="server" Text='<%# Bind("CategoryName") %>'></asp:TextBox>--%>
                         <asp:DropDownList ID="editCategoryDropDownList" runat="server" 
                             DataSourceID="categoryDataSource" 
                             DataTextField="CategoryName" DataValueField="idCategory"
@@ -36,12 +33,8 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="UserName" HeaderText="Submitted by" InsertVisible="False" ReadOnly="True"/>
                 <asp:TemplateField HeaderText="Ingredients">
-                    <EditItemTemplate> 
-                        <asp:GridView ID="GridView1" runat="server" ShowHeader="False">
-                        </asp:GridView>
-                    </EditItemTemplate>
                     <ItemTemplate> 
-                        <asp:GridView ID="IngredientsGridView" runat="server" ShowHeader="False">
+                        <asp:GridView ID="IngredientsGridView" runat="server" DataSourceID="ingredientsDataSource" ShowHeader="False">
                         </asp:GridView>
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -93,11 +86,15 @@
             </UpdateParameters>      
         </asp:SqlDataSource>
          <%--Data source for ingredients--%>
-       <%-- <asp:SqlDataSource ID="ingredientsDataSource" runat="server"
+        <asp:SqlDataSource ID="ingredientsDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
             SelectCommand="SELECT [Quantity], [UnitName], [IngredientName]
-            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] ">          
-        </asp:SqlDataSource> --%>
+            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] 
+            AND [RB_RecipeIngredient].[idRecipe]=@idRecipe"> 
+            <SelectParameters>
+                <asp:Parameter Name="idRecipe" Type="Int32" />
+            </SelectParameters>         
+        </asp:SqlDataSource> 
         <%--Data source for category drop down list--%>
         <asp:SqlDataSource ID="categoryDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
