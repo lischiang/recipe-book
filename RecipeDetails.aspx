@@ -31,13 +31,7 @@
                         <asp:Label ID="Category" runat="server" Text='<%# Bind("CategoryName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="UserName" HeaderText="Submitted by" InsertVisible="False" ReadOnly="True"/>
-                <asp:TemplateField HeaderText="Ingredients">
-                    <ItemTemplate> 
-                        <asp:GridView ID="IngredientsGridView" runat="server" DataSourceID="ingredientsDataSource" ShowHeader="False">
-                        </asp:GridView>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="UserName" HeaderText="Submitted by" InsertVisible="False" ReadOnly="True"/>                
                 <asp:TemplateField HeaderText="Preparation Time">
                     <EditItemTemplate>
                         <asp:TextBox ID="editPrepareMinutesTextBox" runat="server" Text='<%# Bind("PrepareMinutes") %>'></asp:TextBox>
@@ -70,6 +64,21 @@
             </HeaderTemplate>  
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
         </asp:DetailsView>
+        <br />
+        <asp:GridView ID="IngredientsGridView" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+            <AlternatingRowStyle BackColor="#CCCCCC" />
+            <FooterStyle BackColor="#CCCCCC" />
+            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+            <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+            <SortedAscendingHeaderStyle BackColor="#808080" />
+            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+            <SortedDescendingHeaderStyle BackColor="#383838" />
+
+        </asp:GridView>
+
+
         <%--Data source for recipe--%>
         <asp:SqlDataSource ID="recipeDataSource" runat="server"
              ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
@@ -85,16 +94,6 @@
                 <asp:Parameter Name="RecipeDescription" Type="String" />
             </UpdateParameters>      
         </asp:SqlDataSource>
-         <%--Data source for ingredients--%>
-        <asp:SqlDataSource ID="ingredientsDataSource" runat="server"
-            ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
-            SelectCommand="SELECT [Quantity], [UnitName], [IngredientName]
-            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] 
-            AND [RB_RecipeIngredient].[idRecipe]=@idRecipe"> 
-            <SelectParameters>
-                <asp:Parameter Name="idRecipe" Type="Int32" />
-            </SelectParameters>         
-        </asp:SqlDataSource> 
         <%--Data source for category drop down list--%>
         <asp:SqlDataSource ID="categoryDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
