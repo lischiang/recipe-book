@@ -135,7 +135,7 @@
                     </td>
                     <td>
                         <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl0" />
-                        <asp:Button ID="addIngredientButton" runat="server" Text="Add Ingredient" />
+                        <asp:Button ID="addIngredientButton" runat="server" Text="Add Ingredient" OnClick="addIngredientButton_Click" />
                     </td>
                 </tr>
 

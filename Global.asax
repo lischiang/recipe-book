@@ -13,6 +13,9 @@
 
         int idCurrentUser = 1; // this value needs to be updated at the login of a certain user. Set to 1 for example
         Application["idCurrentUser"] = idCurrentUser;
+
+        List<Ingredient> newListOfIngredients = new List<Ingredient>(); //new list of Ingredients
+        Application["ingredients"] = newListOfIngredients;       // application variable: list of ingredients
     }
     
     void Application_End(object sender, EventArgs e) 

@@ -12,8 +12,15 @@ using System.Web.UI.WebControls;
 
 public partial class AddRecipe : System.Web.UI.Page
 {
+    
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        // Bind the gridview of the ingredients to the list of ingredients
+        List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
+        ingredientsGridView.DataSource = newListOfIngredients;
+        ingredientsGridView.DataBind();
+
         if (!Page.IsPostBack)
         {
             // Populate dropdown list for hours of preparation/cooking 
@@ -65,10 +72,6 @@ public partial class AddRecipe : System.Web.UI.Page
                     IngredientWebUserControl0.DDLUnit.DataBind();
                     // Add default item 
                     IngredientWebUserControl0.DDLUnit.Items.Insert(0, new ListItem("--Select measure unit--"));
-
-                    
-
-
                 }
                 catch (Exception ex)
                 {
@@ -96,8 +99,8 @@ public partial class AddRecipe : System.Web.UI.Page
             }
         }
 
-        // if all the ingredients have a name, then we proceed to saving the information of the recipe;
-        // if one the web user controls for the ingredients has a name missing, we do not save the recipe
+        // if all the ingredients have a name, then we proceed to save the information of the recipe;
+        // if the web user control for the ingredients has the name missing, we do not save the recipe
         if (ingredientTxtValid)
         {
             // Save the preparation/cooking time selected by the user
@@ -135,26 +138,10 @@ public partial class AddRecipe : System.Web.UI.Page
 
             /////////////////////////////////////////////////////////////////////////////////
             //// Create the list of Ingredients
+            List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
 
-            List<Ingredient> newListOfIngredients = new List<Ingredient>(); //new list of Ingredients
+            /////////////////////////////////////////////////////////////////////////////////
 
-            //IngredientWebUserControl0
-            if (IngredientWebUserControl0.IndexName != "--Select ingredient--")
-            {
-                double quantity = 0;
-                if (!String.IsNullOrEmpty(IngredientWebUserControl0.Quantity))
-                {
-                    quantity = Convert.ToDouble(IngredientWebUserControl0.Quantity);
-                }
-                Ingredient newIngredient = new Ingredient
-                {
-                    IndexIngredient = IngredientWebUserControl0.IndexName,
-                    Quantity = quantity,
-                    IndexUnitOfMeasure = IngredientWebUserControl0.IndexUnitOfMeasure
-                };
-                newListOfIngredients.Add(newIngredient);
-            }
- 
             // get category
             string indexCategory = "";
             if (DropDownListCategory.SelectedValue != "--Select ingredient--")
@@ -256,6 +243,10 @@ public partial class AddRecipe : System.Web.UI.Page
             finally
             {
                 conn.Close();
+
+                // reset application variable ingredients
+                
+                newListOfIngredients.Clear();
             }
         }
 
@@ -337,8 +328,30 @@ public partial class AddRecipe : System.Web.UI.Page
         DropDownListCategory.DataBind();
 
         // Select the new added category
-        //int size = DropDownListCategory.Items.Count;
         DropDownListCategory.SelectedIndex = DropDownListCategory.Items.Count - 1;
+    }
 
+    protected void addIngredientButton_Click(object sender, EventArgs e)
+    {
+        //IngredientWebUserControl0
+        if (IngredientWebUserControl0.IndexName != "--Select ingredient--")
+        {
+            double quantity = 0;
+            if (!String.IsNullOrEmpty(IngredientWebUserControl0.Quantity))
+            {
+                quantity = Convert.ToDouble(IngredientWebUserControl0.Quantity);
+            }
+            Ingredient newIngredient = new Ingredient
+            {
+                IndexIngredient = IngredientWebUserControl0.IndexName,
+                Quantity = quantity,
+                IndexUnitOfMeasure = IngredientWebUserControl0.IndexUnitOfMeasure
+            };
+
+            List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
+            newListOfIngredients.Add(newIngredient);
+
+            ingredientsGridView.DataBind();
+        }
     }
 }
