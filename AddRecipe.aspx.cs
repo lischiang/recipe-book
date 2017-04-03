@@ -333,8 +333,12 @@ public partial class AddRecipe : System.Web.UI.Page
         newCategoryTextBox.Enabled = false;
         newCategoryConfirmButton.Visible = false;
 
+        // Bind drop down list category again to refresh
         DropDownListCategory.DataBind();
 
+        // Select the new added category
+        //int size = DropDownListCategory.Items.Count;
+        DropDownListCategory.SelectedIndex = DropDownListCategory.Items.Count - 1;
 
     }
 }
