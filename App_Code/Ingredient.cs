@@ -15,11 +15,18 @@ public class Ingredient
         //
     }
 
-    private string indexIngredient;            // name of the ingredient
+    private string indexIngredient;            // index of the ingredient
     public string IndexIngredient
     {
         get { return indexIngredient; }
         set { indexIngredient = value; }
+    }
+
+    private string nameIngredient;            // name of the ingredient
+    public string NameIngredient
+    {
+        get { return nameIngredient; }
+        set { nameIngredient = value; }
     }
 
     private double quantity;        // quantity of the ingredient
@@ -29,10 +36,17 @@ public class Ingredient
         set { quantity = value; }
     }
 
-    private string indexUnitOfMeasure;   // unit of measure of the ingredient
+    private string indexUnitOfMeasure;   // index of the unit of measure 
     public string IndexUnitOfMeasure
     {
         get { return indexUnitOfMeasure; }
         set { indexUnitOfMeasure = value; }
+    }
+
+    private string nameUnitOfMeasure;           // name of the unit of measure 
+    public string NameUnitOfMeasure
+    {
+        get { return nameUnitOfMeasure; }
+        set { nameUnitOfMeasure = value; }
     }
 }

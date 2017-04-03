@@ -22,6 +22,12 @@ public partial class WebUserControl : System.Web.UI.UserControl
         set { DropDownListNameIngredient.SelectedValue = value; }
     }
 
+    public string Name
+    {
+        get { return DropDownListNameIngredient.SelectedItem.ToString(); }
+        //set { DropDownListNameIngredient.SelectedValue = value; }
+    }
+
     public DropDownList DDLName
     {
         get { return DropDownListNameIngredient; }
@@ -39,6 +45,13 @@ public partial class WebUserControl : System.Web.UI.UserControl
         get { return DropDownListUnitOfMeasure.SelectedValue; }
         set { DropDownListUnitOfMeasure.SelectedValue = value; }
     }
+
+    public string NameUnitOfMeasure
+    {
+        get { return DropDownListUnitOfMeasure.SelectedItem.ToString(); }
+        //set { DropDownListUnitOfMeasure.SelectedValue = value; }
+    }
+
     public DropDownList DDLUnit
     {
         get { return DropDownListUnitOfMeasure; }

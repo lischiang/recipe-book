@@ -143,7 +143,30 @@
                     <td>                   
                     </td>
                     <td>   
-                        <asp:GridView ID="ingredientsGridView" runat="server">
+                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:TemplateField HeaderText="Ingredient Name">
+                                    <ItemTemplate>
+                                        <asp:Label ID="IngredientNameLabel" runat="server" 
+                                            Text="<%# ((Ingredient) Container.DataItem).NameIngredient %>">>
+                                        </asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Quantity">
+                                    <ItemTemplate>
+                                        <asp:Label ID="IngredientQuantityLabel" runat="server" 
+                                            Text="<%# ((Ingredient) Container.DataItem).Quantity %>">>
+                                        </asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Unit of Measure">
+                                    <ItemTemplate>
+                                        <asp:Label ID="IngredientUnitOFMeasureLabel" runat="server" 
+                                            Text="<%# ((Ingredient) Container.DataItem).NameUnitOfMeasure %>">>
+                                        </asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
                         </asp:GridView>           
                     </td>
                 </tr>

@@ -344,8 +344,10 @@ public partial class AddRecipe : System.Web.UI.Page
             Ingredient newIngredient = new Ingredient
             {
                 IndexIngredient = IngredientWebUserControl0.IndexName,
+                NameIngredient = IngredientWebUserControl0.Name,
                 Quantity = quantity,
-                IndexUnitOfMeasure = IngredientWebUserControl0.IndexUnitOfMeasure
+                IndexUnitOfMeasure = IngredientWebUserControl0.IndexUnitOfMeasure,
+                NameUnitOfMeasure = IngredientWebUserControl0.NameUnitOfMeasure
             };
 
             List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
