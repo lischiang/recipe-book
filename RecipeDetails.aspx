@@ -12,20 +12,60 @@
     <form runat="server">
         <asp:DetailsView ID="RecipeDetailView" runat="server" Height="50px" Width="700px" 
             AutoGenerateRows="False" BackColor="White" BorderColor="#999999" BorderStyle="Solid" 
-            BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+            BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical"
+            DataSourceID="recipeDataSource" 
+            DataKeyNames="idRecipe" onmodechanging="RecipeDetailView_ModeChanging">
+             <%--OnItemUpdating="RecipeDetailView_ItemUpdating">--%>
+             <%--OnItemUpdated="RecipeDetailView_ItemUpdated">--%>
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <EditRowStyle BackColor="#c1c1d7" Font-Bold="True" ForeColor="White" />
             <FieldHeaderStyle Font-Bold="True"/>
             <Fields>
-                <asp:BoundField DataField="PrepareMinutes" HeaderText="Preparation Time"/>
-                <asp:BoundField DataField="NumberServings" HeaderText="Number of Servings" />
+                <asp:TemplateField HeaderText="Category">
+                    <EditItemTemplate>
+                        <%--<asp:TextBox ID="editCategoryTextBox" runat="server" Text='<%# Bind("CategoryName") %>'></asp:TextBox>--%>
+                        <asp:DropDownList ID="editCategoryDropDownList" runat="server" 
+                            DataSourceID="categoryDataSource" 
+                            DataTextField="CategoryName" DataValueField="idCategory"
+                             SelectedValue='<%# Bind("idCategory")%>'>
+                        </asp:DropDownList>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Category" runat="server" Text='<%# Bind("CategoryName") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:BoundField DataField="UserName" HeaderText="Submitted by" InsertVisible="False" ReadOnly="True"/>
                 <asp:TemplateField HeaderText="Ingredients">
                     <ItemTemplate> 
                         <asp:GridView ID="IngredientsGridView" runat="server" ShowHeader="False">
                         </asp:GridView>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:BoundField DataField="RecipeDescription" HeaderText="Directions" />             
+                <asp:TemplateField HeaderText="Preparation Time">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="editPrepareMinutesTextBox" runat="server" Text='<%# Bind("PrepareMinutes") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="PrepareMinutes" runat="server" Text='<%# Bind("PrepareMinutes") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Number of Servings">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="editNumberServingsTextBox" runat="server" Text='<%# Bind("NumberServings") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="NumberServings" runat="server" Text='<%# Bind("NumberServings") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Directions">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="editRecipeDescriptionTextBox" runat="server" Text='<%# Bind("RecipeDescription") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="RecipeDescription" runat="server" Text='<%# Bind("RecipeDescription") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField ShowEditButton="True" />         
             </Fields> 
             <HeaderStyle Font-Bold="true" Font-Size="Larger" Height="70px" HorizontalAlign="Center" BackColor="Black" ForeColor="White"/>
             <HeaderTemplate>
@@ -33,10 +73,29 @@
             </HeaderTemplate>  
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
         </asp:DetailsView>
+        <%--Data source for recipe--%>
+        <asp:SqlDataSource ID="recipeDataSource" runat="server"
+            ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+            SelectCommand="SELECT [idRecipe], [RecipeName], [UserName], [RB_Recipe].[idCategory], [CategoryName], [PrepareMinutes], [NumberServings], [RecipeDescription] 
+            FROM [RB_Category], [RB_Recipe], [RB_User] WHERE [RB_Category].[idCategory]=[RB_Recipe].[idCategory] AND [RB_Recipe].[idUser]=[RB_User].[idUser] ">           
+        </asp:SqlDataSource>
+         <%--Data source for ingredients--%>
+       <%-- <asp:SqlDataSource ID="ingredientsDataSource" runat="server"
+            ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+            SelectCommand="SELECT [Quantity], [UnitName], [IngredientName]
+            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] ">           --%>
+        </asp:SqlDataSource>
+        <%--Data source for category drop down list--%>
+        <asp:SqlDataSource ID="categoryDataSource" runat="server"
+            ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+            SelectCommand="SELECT [idCategory], [CategoryName] FROM [RB_Category]">
+        </asp:SqlDataSource>
 
         <p>
             <asp:button ID="DeleteRecipeButton" runat="server" text="Delete Recipe" OnClick="DeleteRecipeButton_Click" />
         </p>
+        <asp:label ID="MessageLabel" runat="server" text=""></asp:label>
+        <%--<asp:label ID="MessageLabel1" runat="server" text="Label"></asp:label>--%>
     </form>
     <p>
         <a href="Recipes.aspx">Go back to the list of recipes</a>
