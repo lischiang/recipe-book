@@ -73,7 +73,9 @@
                         <asp:Label runat="server" Text="Category:"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="DropDownListCategory" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="DropDownListCategory" runat="server" DataSourceID="categoryDataSource" 
+                            DataTextField="CategoryName" DataValueField="idCategory">
+                        </asp:DropDownList>
                         <asp:LinkButton ID="addNewCategoryLinkButton" runat="server" Text="Add new Category..." OnClick="addNewCategoryLinkButton_Click"></asp:LinkButton>
                         <asp:TextBox ID="newCategoryTextBox" runat="server" Visible="false" Enabled="false"></asp:TextBox>
                         <asp:Button ID="newCategoryConfirmButton" runat="server" Text="Save New Category" visible="false" OnClick="newCategoryConfirmButton_Click"/>
@@ -164,7 +166,14 @@
                 </tr>
 
             </table>
+
+            <%--Data source for category drop down list--%>
+            <asp:SqlDataSource ID="categoryDataSource" runat="server"
+                ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+                SelectCommand="SELECT [idCategory], [CategoryName] FROM [RB_Category]">
+            </asp:SqlDataSource>      
         </div>
+
         <div>
             <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
             <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

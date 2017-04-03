@@ -66,18 +66,7 @@ public partial class AddRecipe : System.Web.UI.Page
                     // Add default item 
                     IngredientWebUserControl0.DDLUnit.Items.Insert(0, new ListItem("--Select measure unit--"));
 
-                    /////////////DropDownListCategory
-                    // Get data about categories from the database
-                    SqlDataAdapter adapterCategories = new SqlDataAdapter("SELECT idCategory, CategoryName FROM RB_Category", conn);
-                    DataTable storeTableCategory = new DataTable();    // table to store the sql command
-                    adapterCategories.Fill(storeTableCategory);
-                    // Populate dropdownlist
-                    DropDownListCategory.DataSource = storeTableCategory;
-                    DropDownListCategory.DataTextField = "CategoryName";
-                    DropDownListCategory.DataValueField = "idCategory";
-                    DropDownListCategory.DataBind();
-                    // Add default item 
-                    DropDownListCategory.Items.Insert(0, new ListItem("--Select category--"));
+                    
 
 
                 }
@@ -303,6 +292,7 @@ public partial class AddRecipe : System.Web.UI.Page
         newCategoryTextBox.Enabled = true;
         newCategoryTextBox.Focus();
         newCategoryConfirmButton.Visible = true;
+
     }
 
     protected void newCategoryConfirmButton_Click(object sender, EventArgs e)
@@ -342,5 +332,9 @@ public partial class AddRecipe : System.Web.UI.Page
         newCategoryTextBox.Visible = false;
         newCategoryTextBox.Enabled = false;
         newCategoryConfirmButton.Visible = false;
+
+        DropDownListCategory.DataBind();
+
+
     }
 }
