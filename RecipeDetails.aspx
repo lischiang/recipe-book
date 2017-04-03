@@ -36,6 +36,10 @@
                 </asp:TemplateField>
                 <asp:BoundField DataField="UserName" HeaderText="Submitted by" InsertVisible="False" ReadOnly="True"/>
                 <asp:TemplateField HeaderText="Ingredients">
+                    <EditItemTemplate> 
+                        <asp:GridView ID="GridView1" runat="server" ShowHeader="False">
+                        </asp:GridView>
+                    </EditItemTemplate>
                     <ItemTemplate> 
                         <asp:GridView ID="IngredientsGridView" runat="server" ShowHeader="False">
                         </asp:GridView>
@@ -75,22 +79,30 @@
         </asp:DetailsView>
         <%--Data source for recipe--%>
         <asp:SqlDataSource ID="recipeDataSource" runat="server"
-            ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
             SelectCommand="SELECT [idRecipe], [RecipeName], [UserName], [RB_Recipe].[idCategory], [CategoryName], [PrepareMinutes], [NumberServings], [RecipeDescription] 
-            FROM [RB_Category], [RB_Recipe], [RB_User] WHERE [RB_Category].[idCategory]=[RB_Recipe].[idCategory] AND [RB_Recipe].[idUser]=[RB_User].[idUser] ">           
+            FROM [RB_Category], [RB_Recipe], [RB_User] WHERE [RB_Category].[idCategory]=[RB_Recipe].[idCategory] AND [RB_Recipe].[idUser]=[RB_User].[idUser] "
+            UpdateCommand="UPDATE RB_Recipe SET idCategory=@idCategory, PrepareMinutes=@PrepareMinutes, NumberServings=@NumberServings, RecipeDescription=@RecipeDescription 
+            WHERE idRecipe=@idRecipe">  
+            <UpdateParameters>
+                <asp:Parameter Name="idRecipe" Type="Int32" />
+                <asp:Parameter Name="idCategory" Type="Int32" />
+                <asp:Parameter Name="PrepareMinutes" Type="Int32" />
+                <asp:Parameter Name="NumberServings" Type="Int32" />
+                <asp:Parameter Name="RecipeDescription" Type="String" />
+            </UpdateParameters>      
         </asp:SqlDataSource>
          <%--Data source for ingredients--%>
        <%-- <asp:SqlDataSource ID="ingredientsDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
             SelectCommand="SELECT [Quantity], [UnitName], [IngredientName]
-            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] ">           --%>
-        </asp:SqlDataSource>
+            FROM [RB_RecipeIngredient], [RB_MeasureUnit], [RB_Ingredient] WHERE [RB_RecipeIngredient].[idIngredient]=[RB_Ingredient].[idIngredient] AND [RB_MeasureUnit].[idUnit]=[RB_RecipeIngredient].[idUnit] ">          
+        </asp:SqlDataSource> --%>
         <%--Data source for category drop down list--%>
         <asp:SqlDataSource ID="categoryDataSource" runat="server"
             ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
             SelectCommand="SELECT [idCategory], [CategoryName] FROM [RB_Category]">
-        </asp:SqlDataSource>
-
+        </asp:SqlDataSource>      
         <p>
             <asp:button ID="DeleteRecipeButton" runat="server" text="Delete Recipe" OnClick="DeleteRecipeButton_Click" />
         </p>
