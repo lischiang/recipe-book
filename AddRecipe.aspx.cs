@@ -356,4 +356,9 @@ public partial class AddRecipe : System.Web.UI.Page
             ingredientsGridView.DataBind();
         }
     }
+
+    protected void ingredientsGridView_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+    {
+
+    }
 }

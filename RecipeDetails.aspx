@@ -83,9 +83,12 @@
         <asp:SqlDataSource ID="recipeDataSource" runat="server"
              ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
             SelectCommand="SELECT [idRecipe], [RecipeName], [UserName], [RB_Recipe].[idCategory], [CategoryName], [PrepareMinutes], [NumberServings], [RecipeDescription] 
-            FROM [RB_Category], [RB_Recipe], [RB_User] WHERE [RB_Category].[idCategory]=[RB_Recipe].[idCategory] AND [RB_Recipe].[idUser]=[RB_User].[idUser] "
+            FROM [RB_Category], [RB_Recipe], [RB_User] WHERE [RB_Category].[idCategory]=[RB_Recipe].[idCategory] AND [RB_Recipe].[idUser]=[RB_User].[idUser] AND idRecipe=@idRecipe"
             UpdateCommand="UPDATE RB_Recipe SET idCategory=@idCategory, PrepareMinutes=@PrepareMinutes, NumberServings=@NumberServings, RecipeDescription=@RecipeDescription 
             WHERE idRecipe=@idRecipe">  
+            <SelectParameters>
+                <asp:Parameter Name="idRecipe" Type="Int32" />
+            </SelectParameters>
             <UpdateParameters>
                 <asp:Parameter Name="idRecipe" Type="Int32" />
                 <asp:Parameter Name="idCategory" Type="Int32" />

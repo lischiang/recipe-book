@@ -143,7 +143,7 @@
                     <td>                   
                     </td>
                     <td>   
-                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="false">
+                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanging="ingredientsGridView_SelectedIndexChanging">
                             <Columns>
                                 <asp:TemplateField HeaderText="Ingredient Name">
                                     <ItemTemplate>
@@ -166,6 +166,7 @@
                                         </asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:CommandField ShowEditButton="True" />
                             </Columns>
                         </asp:GridView>           
                     </td>

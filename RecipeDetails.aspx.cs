@@ -14,6 +14,8 @@ public partial class RecipeDetails : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         BindDetails();
+
+        recipeDataSource.SelectParameters["idRecipe"].DefaultValue = ((int)Application["indRecipeViewDetails"]).ToString();
     }
 
     private void BindDetails()
