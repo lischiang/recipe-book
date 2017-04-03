@@ -76,7 +76,7 @@
                         <asp:DropDownList ID="DropDownListCategory" runat="server"></asp:DropDownList>
                         <asp:LinkButton ID="addNewCategoryLinkButton" runat="server" Text="Add new Category..." OnClick="addNewCategoryLinkButton_Click"></asp:LinkButton>
                         <asp:TextBox ID="newCategoryTextBox" runat="server" Visible="false" Enabled="false"></asp:TextBox>
-                        <asp:Button ID="newCategoryConfirmButton" runat="server" Text="Save New Category" visible="false"/>
+                        <asp:Button ID="newCategoryConfirmButton" runat="server" Text="Save New Category" visible="false" OnClick="newCategoryConfirmButton_Click"/>
                     </td>
                 </tr>
 
@@ -133,107 +133,19 @@
                     </td>
                     <td>
                         <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl0" />
+                        <asp:Button ID="addIngredientButton" runat="server" Text="Add Ingredient" />
                     </td>
                 </tr>
+
                 <tr>
-                    <td>
+                    <td>                   
                     </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl1" />
-                    </td>  
-                </tr>
-                <tr>
-                    <td>
+                    <td>   
+                        <asp:GridView ID="ingredientsGridView" runat="server">
+                        </asp:GridView>           
                     </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl2" />
-                    </td>  
                 </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl3" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl4" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl5" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl6" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl7" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl8" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl9" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl10" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl11" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl12" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl13" />
-                    </td>  
-                </tr>
-                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <uc1:IngredientWebUserControl runat="server" ID="IngredientWebUserControl14" />
-                    </td>  
-                </tr>
- 
+                
                 <tr style="text-align: center">
                     <td colspan="3" style="display: flex">
                         <div style="margin-right: 10px">
@@ -253,9 +165,12 @@
 
             </table>
         </div>
-        <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+        <div>
+            <asp:Label ID="MessageLabel" runat="server" Text=""></asp:Label>
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+        </div>
+        
     </form>
 </asp:Content>
 
