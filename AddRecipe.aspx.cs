@@ -893,4 +893,13 @@ public partial class AddRecipe : System.Web.UI.Page
     }
 
     // Lisa Chiang, student number 300925122
+
+    protected void addNewCategoryLinkButton_Click(object sender, EventArgs e)
+    {
+        addNewCategoryLinkButton.Visible = false;
+
+        newCategoryTextBox.Visible = true;
+        newCategoryTextBox.Enabled = true;
+        newCategoryConfirmButton.Visible = true;
+    }
 }

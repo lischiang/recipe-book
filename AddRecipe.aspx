@@ -73,8 +73,10 @@
                         <asp:Label runat="server" Text="Category:"></asp:Label>
                     </td>
                     <td>
-                        <%--<asp:TextBox ID="CategoryText" runat="server"></asp:TextBox>--%>
                         <asp:DropDownList ID="DropDownListCategory" runat="server"></asp:DropDownList>
+                        <asp:LinkButton ID="addNewCategoryLinkButton" runat="server" Text="Add new Category..." OnClick="addNewCategoryLinkButton_Click"></asp:LinkButton>
+                        <asp:TextBox ID="newCategoryTextBox" runat="server" Visible="false" Enabled="false"></asp:TextBox>
+                        <asp:Button ID="newCategoryConfirmButton" runat="server" Text="Save New Category" visible="false"/>
                     </td>
                 </tr>
 
