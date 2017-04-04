@@ -143,7 +143,7 @@
                     <td>                   
                     </td>
                     <td>   
-                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanging="ingredientsGridView_SelectedIndexChanging" OnRowEditing="ingredientsGridView_RowEditing">
+                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="False" EnableViewState="false" OnSelectedIndexChanging="ingredientsGridView_SelectedIndexChanging" OnRowEditing="ingredientsGridView_RowEditing" OnRowUpdating="ingredientsGridView_RowUpdating" OnRowCancelingEdit="ingredientsGridView_RowCancelingEdit">
                             <Columns>
                                 <asp:TemplateField HeaderText="Ingredient Name">
                                     <ItemTemplate>
@@ -151,6 +151,11 @@
                                             Text="<%# ((Ingredient) Container.DataItem).NameIngredient %>">>
                                         </asp:Label>
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="editIngredientNameDropDownList" runat="server" DataSourceID="ingredientDataSource" 
+                                            DataTextField="IngredientName" DataValueField="idIngredient">
+                                        </asp:DropDownList>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Quantity">
                                     <ItemTemplate>
@@ -158,6 +163,9 @@
                                             Text="<%# ((Ingredient) Container.DataItem).Quantity %>">>
                                         </asp:Label>
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="editIngredientQuantityTextBox" runat="server" Text="<%# ((Ingredient) Container.DataItem).Quantity %>"></asp:TextBox>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Unit of Measure">
                                     <ItemTemplate>
@@ -165,6 +173,11 @@
                                             Text="<%# ((Ingredient) Container.DataItem).NameUnitOfMeasure %>">>
                                         </asp:Label>
                                     </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="editIngredientUnitOFMeasureDropDownList" runat="server" DataSourceID="unitsOfMeasureDataSource" 
+                                            DataTextField="UnitName" DataValueField="idUnit">
+                                        </asp:DropDownList>
+                                    </EditItemTemplate>
                                 </asp:TemplateField>
                                 <asp:CommandField ShowEditButton="True" />
                             </Columns>
@@ -195,7 +208,17 @@
             <asp:SqlDataSource ID="categoryDataSource" runat="server"
                 ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
                 SelectCommand="SELECT [idCategory], [CategoryName] FROM [RB_Category]">
-            </asp:SqlDataSource>      
+            </asp:SqlDataSource>   
+             <%--Data source for ingredients drop down list--%>
+            <asp:SqlDataSource ID="ingredientDataSource" runat="server"
+                ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+                SelectCommand="SELECT [idIngredient], [IngredientName] FROM [RB_Ingredient]">
+            </asp:SqlDataSource>   
+            <%--Data source for units of measure drop down list--%>
+            <asp:SqlDataSource ID="unitsOfMeasureDataSource" runat="server"
+                ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+                SelectCommand="SELECT [idUnit], [UnitName] FROM [RB_MeasureUnit]">
+            </asp:SqlDataSource>          
         </div>
 
         <div>

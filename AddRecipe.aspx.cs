@@ -364,8 +364,21 @@ public partial class AddRecipe : System.Web.UI.Page
 
     protected void ingredientsGridView_RowEditing(object sender, GridViewEditEventArgs e)
     {
-
+        ingredientsGridView.EditIndex = e.NewEditIndex;
+        ingredientsGridView.DataBind();
     }
 
     // Lisa Chiang, student number 300925122
+
+    protected void ingredientsGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+
+    }
+
+
+    protected void ingredientsGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        ingredientsGridView.EditIndex = -1;
+        DataBind();
+    }
 }

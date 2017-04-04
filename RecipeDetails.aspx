@@ -65,6 +65,7 @@
             <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
         </asp:DetailsView>
         <br />
+        <%--Gridview for ingredients--%>
         <asp:GridView ID="IngredientsGridView" runat="server" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
             <AlternatingRowStyle BackColor="#CCCCCC" />
             <FooterStyle BackColor="#CCCCCC" />
