@@ -273,7 +273,7 @@ public partial class AddRecipe : System.Web.UI.Page
         }
     }
 
-    // Lisa Chiang, student number 300925122
+
 
     protected void addNewCategoryLinkButton_Click(object sender, EventArgs e)
     {
@@ -361,4 +361,11 @@ public partial class AddRecipe : System.Web.UI.Page
     {
 
     }
+
+    protected void ingredientsGridView_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+
+    }
+
+    // Lisa Chiang, student number 300925122
 }
