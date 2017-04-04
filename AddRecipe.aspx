@@ -58,12 +58,9 @@
                         <asp:Label runat="server" Text="Submitted by:"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="SubmittedByText" runat="server"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorSubmittedBy" 
-                        runat="server" ControlToValidate = "SubmittedByText" 
-                        ErrorMessage="Name of the recipe author missing" Text="*"
-                        ValidationGroup="MissingFields"
-                        SetFocusOnError ="true" ForeColor="Red"/>
+                        <asp:DropDownList ID="SubmittedByDropDownList" runat="server" DataSourceID="userDataSource" 
+                            DataTextField="UserName" DataValueField="idUser">
+                        </asp:DropDownList>
                     </td>
                 </tr>
 
@@ -204,6 +201,11 @@
 
             </table>
 
+            <%--Data source for users drop down list--%>
+            <asp:SqlDataSource ID="userDataSource" runat="server"
+                ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
+                SelectCommand="SELECT [idUser], [UserName] FROM [RB_User]">
+            </asp:SqlDataSource>  
             <%--Data source for category drop down list--%>
             <asp:SqlDataSource ID="categoryDataSource" runat="server"
                 ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"

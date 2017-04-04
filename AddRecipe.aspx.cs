@@ -99,7 +99,6 @@ public partial class AddRecipe : System.Web.UI.Page
             }
         }
 
-        // if all the ingredients have a name, then we proceed to save the information of the recipe;
         // if the web user control for the ingredients has the name missing, we do not save the recipe
         if (ingredientTxtValid)
         {
@@ -136,11 +135,8 @@ public partial class AddRecipe : System.Web.UI.Page
                     PrepareTimeMinutesDropDownList.SelectedValue);
             }
 
-            /////////////////////////////////////////////////////////////////////////////////
-            //// Create the list of Ingredients
+            //// Recover the list of Ingredients
             List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
-
-            /////////////////////////////////////////////////////////////////////////////////
 
             // get category
             string indexCategory = "";
@@ -152,7 +148,8 @@ public partial class AddRecipe : System.Web.UI.Page
             Recipe newRecipe = new Recipe
             {
                 NameRecipe = NameRecipeText.Text,
-                SubmittedBy = SubmittedByText.Text,
+                SubmittedBy = SubmittedByDropDownList.SelectedItem.ToString(),
+                IndexSubmittedBy = SubmittedByDropDownList.SelectedValue,
                 IndexCategory = indexCategory,
                 PrepareTime = preparationTimeArray[0] + "h " + preparationTimeArray[1] + "min",
                 NumberOfServings = Convert.ToInt32(NumberOfServingsText.Text),
@@ -189,7 +186,7 @@ public partial class AddRecipe : System.Web.UI.Page
             comm.Parameters["@idCategory"].Value = !string.IsNullOrEmpty(newRecipe.IndexCategory) ?
                 Convert.ToInt32(newRecipe.IndexCategory) : (object)DBNull.Value;
             comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
-            comm.Parameters["@idUser"].Value = (int)Application["idCurrentUser"];   // this is supposed to be the userid of the person that did login
+            comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
 
             try
             {

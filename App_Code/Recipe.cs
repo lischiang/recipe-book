@@ -29,6 +29,13 @@ public class Recipe
         set { submittedBy = value; }
     }
 
+    private string indexSubmittedBy;        // index of name of the person that submitted the recipe
+    public string IndexSubmittedBy
+    {
+        get { return indexSubmittedBy; }
+        set { indexSubmittedBy = value; }
+    }
+
     private string indexCategory;   // category of the recipe
     public string IndexCategory
     {
