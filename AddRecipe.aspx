@@ -140,7 +140,7 @@
                     <td>                   
                     </td>
                     <td>   
-                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="False" EnableViewState="false" OnSelectedIndexChanging="ingredientsGridView_SelectedIndexChanging" OnRowEditing="ingredientsGridView_RowEditing" OnRowUpdating="ingredientsGridView_RowUpdating" OnRowCancelingEdit="ingredientsGridView_RowCancelingEdit">
+                        <asp:GridView ID="ingredientsGridView" runat="server" AutoGenerateColumns="False" EnableViewState="false" OnRowEditing="ingredientsGridView_RowEditing" OnRowUpdating="ingredientsGridView_RowUpdating" OnRowCancelingEdit="ingredientsGridView_RowCancelingEdit">
                             <Columns>
                                 <asp:TemplateField HeaderText="Ingredient Name">
                                     <ItemTemplate>
@@ -150,7 +150,7 @@
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:DropDownList ID="editIngredientNameDropDownList" runat="server" DataSourceID="ingredientDataSource" 
-                                            DataTextField="IngredientName" DataValueField="idIngredient">
+                                            DataTextField="IngredientName" DataValueField="idIngredient" SelectedValue="<%# ((Ingredient) Container.DataItem).IndexIngredient %>">
                                         </asp:DropDownList>
                                     </EditItemTemplate>
                                 </asp:TemplateField>
@@ -172,7 +172,7 @@
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:DropDownList ID="editIngredientUnitOFMeasureDropDownList" runat="server" DataSourceID="unitsOfMeasureDataSource" 
-                                            DataTextField="UnitName" DataValueField="idUnit">
+                                            DataTextField="UnitName" DataValueField="idUnit" SelectedValue="<%# ((Ingredient) Container.DataItem).IndexUnitOfMeasure %>">
                                         </asp:DropDownList>
                                     </EditItemTemplate>
                                 </asp:TemplateField>

@@ -18,6 +18,7 @@ public partial class AddRecipe : System.Web.UI.Page
     {
         // Bind the gridview of the ingredients to the list of ingredients
         List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
+        //newListOfIngredients.Clear();
         ingredientsGridView.DataSource = newListOfIngredients;
         ingredientsGridView.DataBind();
 
@@ -270,8 +271,6 @@ public partial class AddRecipe : System.Web.UI.Page
         }
     }
 
-
-
     protected void addNewCategoryLinkButton_Click(object sender, EventArgs e)
     {
         addNewCategoryLinkButton.Visible = false;
@@ -354,28 +353,47 @@ public partial class AddRecipe : System.Web.UI.Page
         }
     }
 
-    protected void ingredientsGridView_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
-    {
-
-    }
-
     protected void ingredientsGridView_RowEditing(object sender, GridViewEditEventArgs e)
     {
         ingredientsGridView.EditIndex = e.NewEditIndex;
         ingredientsGridView.DataBind();
     }
 
-    // Lisa Chiang, student number 300925122
-
     protected void ingredientsGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
+        int positionIngredient = e.RowIndex;    // position of the current ingredient in the list of ingredients of the recipe
+        GridViewRow row = (GridViewRow)ingredientsGridView.Rows[e.RowIndex];    // get row
 
+        // Read the selected ingredient info from the DDL
+        DropDownList newIngredientNameDropDownList = (DropDownList)row.FindControl("editIngredientNameDropDownList");
+        string ingredientIndex = newIngredientNameDropDownList.SelectedValue;   // save index ingredient
+        string ingredientName = newIngredientNameDropDownList.SelectedItem.ToString();  // save name ingredient
+
+        // Read the quantity info from text box
+        TextBox newIngredientQuantityTextBox = (TextBox)row.FindControl("editIngredientQuantityTextBox");
+        string ingredientQuantity = newIngredientQuantityTextBox.Text;
+
+        // Read the selected unit of measeure info from the DDL
+        DropDownList newIngredientUnitOFMeasureDropDownList = (DropDownList)row.FindControl("editIngredientUnitOFMeasureDropDownList");
+        string ingredientUnitOfMeasureIndex = newIngredientUnitOFMeasureDropDownList.SelectedValue;   // save index ingredient unit
+        string ingredientUnitOfMeasureName = newIngredientUnitOFMeasureDropDownList.SelectedItem.ToString();  // save name ingredient unit
+
+        // Modify the ingredient information in the list of already added ingredients
+        List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
+        newListOfIngredients[positionIngredient].IndexIngredient = ingredientIndex;
+        newListOfIngredients[positionIngredient].NameIngredient = ingredientName;
+        newListOfIngredients[positionIngredient].Quantity = Convert.ToDouble(ingredientQuantity);
+        newListOfIngredients[positionIngredient].IndexUnitOfMeasure = ingredientUnitOfMeasureIndex;
+        newListOfIngredients[positionIngredient].NameUnitOfMeasure = ingredientUnitOfMeasureName;
+
+        ingredientsGridView.EditIndex = -1;
+        ingredientsGridView.DataBind(); // bind data of the ingredient GridView
     }
-
 
     protected void ingredientsGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
         ingredientsGridView.EditIndex = -1;
-        DataBind();
+        ingredientsGridView.DataBind();
     }
+    // Lisa Chiang, student number 300925122
 }
