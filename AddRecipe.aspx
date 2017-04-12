@@ -15,7 +15,6 @@
     <%--Form to add a new recipe--%>
     <%--<form runat="server" style="align-content: center">--%>
         <div class="recipecontainer">
-            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
             <table style="margin-left: auto; margin-right: auto; max-width: 1000px; max-height: none">
                 <tr>
                     <%--Header of the form--%>
@@ -59,9 +58,10 @@
                         <asp:Label runat="server" Text="Submitted by:"></asp:Label>
                     </td>
                     <td>
-                        <asp:DropDownList ID="SubmittedByDropDownList" runat="server" DataSourceID="userDataSource" 
+                        <asp:DropDownList ID="SubmittedByDropDownList" runat="server" 
                             DataTextField="UserName" DataValueField="idUser">
                         </asp:DropDownList>
+                        <%--<asp:TextBox ID="SubmittedByTextBox" runat="server" Text="<%=userName %>"></asp:TextBox>--%>
                     </td>
                 </tr>
 
@@ -202,11 +202,11 @@
 
             </table>
 
-            <%--Data source for users drop down list--%>
+            <%--Data source for users drop down list
             <asp:SqlDataSource ID="userDataSource" runat="server"
                 ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"
                 SelectCommand="SELECT [idUser], [UserName] FROM [RB_User]">
-            </asp:SqlDataSource>  
+            </asp:SqlDataSource>  --%>
             <%--Data source for category drop down list--%>
             <asp:SqlDataSource ID="categoryDataSource" runat="server"
                 ConnectionString="<%$ ConnectionStrings:RB_RecipeBook %>"

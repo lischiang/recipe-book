@@ -17,8 +17,6 @@ public partial class AddRecipe : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //MembershipUser currentUser = Membership.GetUser();
-        //Label3.Text = currentUser.UserName;
 
 
         // Bind the gridview of the ingredients to the list of ingredients
@@ -78,12 +76,58 @@ public partial class AddRecipe : System.Web.UI.Page
                     IngredientWebUserControl0.DDLUnit.DataBind();
                     // Add default item 
                     IngredientWebUserControl0.DDLUnit.Items.Insert(0, new ListItem("--Select measure unit--"));
+
+                    // Get data about users from the database
+                    SqlDataAdapter adapterUsers = new SqlDataAdapter("SELECT idUser, UserName FROM RB_User", conn);
+                    DataTable storeTableUsers = new DataTable();    // table to store the sql command
+                    adapterUsers.Fill(storeTableUsers);
+                    // Populate dropdownlist
+                    SubmittedByDropDownList.DataSource = storeTableUsers;
+                    SubmittedByDropDownList.DataTextField = "UserName";
+                    SubmittedByDropDownList.DataValueField = "idUser";
+                    SubmittedByDropDownList.DataBind();
                 }
                 catch (Exception ex)
                 {
                     MessageLabel.Text = "ERROR: " + ex.Message;
                 }
             }
+
+            ///// Select item corresponding to the logged in user
+            MembershipUser currentUser = Membership.GetUser();
+            string userName = currentUser.UserName;
+
+            SqlConnection con;
+            SqlCommand comm;
+            SqlDataReader reader;
+            con = new SqlConnection(connectionString);
+
+            // Create command 
+            comm = new SqlCommand(
+                "SELECT idUser FROM RB_User WHERE UserName = @UserName", con);
+            // Add the idUser parameter
+            comm.Parameters.Add("UserName", SqlDbType.NVarChar);
+            comm.Parameters["UserName"].Value = userName;
+            try
+            {
+                // Open the connection
+                con.Open();
+                reader = comm.ExecuteReader();
+                reader.Read();
+                SubmittedByDropDownList.SelectedValue = reader.GetValue(0).ToString();
+                SubmittedByDropDownList.Enabled = false;
+                reader.Close();
+            }
+            catch
+            {
+                MessageLabel.Text = "Error: user not found";
+            }
+            finally
+            {
+                // Close the connection
+                con.Close();
+            }
+
         }
     }
 
