@@ -8,7 +8,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <p>Set the web site theme: 
             <asp:RadioButtonList ID="RadioButtonSetTheme" runat="server" 
                 RepeatDirection="Horizontal" RepeatLayout="Table">
@@ -18,6 +18,6 @@
         </p>
          
         <asp:button ID="ButtonConfirmSetTheme" runat="server" text="Confirm" OnClick="ButtonConfirmSetTheme_Click" />
-   </form>      
+   <%--</form>--%>      
 </asp:Content>
 

@@ -9,7 +9,7 @@
     </div> 
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <asp:GridView ID="GridViewRecipes" runat="server" AutoGenerateColumns="False" 
             OnSelectedIndexChanged="GridViewRecipes_SelectedIndexChanged">
             <Columns>
@@ -19,7 +19,7 @@
                 <asp:ButtonField CommandName="Select" Text="View Recipe Details" />
                 </Columns>
         </asp:GridView>
-    </form>
+    <%--</form>--%>
 </asp:Content>
 
 

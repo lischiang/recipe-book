@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +17,10 @@ public partial class AddRecipe : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //MembershipUser currentUser = Membership.GetUser();
+        //Label3.Text = currentUser.UserName;
+
+
         // Bind the gridview of the ingredients to the list of ingredients
         List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
         //newListOfIngredients.Clear();
@@ -32,7 +37,7 @@ public partial class AddRecipe : System.Web.UI.Page
                 PrepareTimeHoursDropDownList.Items.Insert(i, new ListItem(value));
             }
 
-            // Populate dropdown list for minutes of preparation/cooking (multiple of 5)
+            // Populate dropdown list for minutes of preparation/cooking
             PrepareTimeMinutesDropDownList.Items.Insert(0, new ListItem("--Select--"));
             for (int i = 1; i < 61; i++)
             {

@@ -11,27 +11,46 @@
 </head>
 
 <body>
-    <div class="banner">
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-        <ul class="w3-navbar w3-border w3-light-grey w3-center">
-            <li style="width: 20%"><a href="Home.aspx">Home</a></li>
-            <li style="width: 20%"><a href="Recipes.aspx">Recipes</a></li>
-            <li style="width: 20%"><a href="AddRecipe.aspx">Add new recipe</a></li>
-            <li style="width: 20%"><a href="Search.aspx">Search</a></li>
-            <li style="width: 20%"><a href="FAQ.aspx">FAQ</a></li>
-        </ul>
+    <form runat="server">
+        <div class="banner">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <ul class="w3-navbar w3-border w3-light-grey w3-center">
+                <li style="width: 20%"><a href="Home.aspx">Home</a></li>
+                <li style="width: 20%"><a href="Recipes.aspx">Recipes</a></li>
+                <li style="width: 20%"><a href="AddRecipe.aspx">Add new recipe</a></li>
+                <li style="width: 20%"><a href="Search.aspx">Search</a></li>
+                <li style="width: 20%"><a href="FAQ.aspx">FAQ</a></li>
+            </ul>
 
-    </div>
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
-    <footer id="footer">
-        <p>Posted by: Lisa Chiang</p>
-        <p>Centennial College student number: 300925122</p>
-        <p>Contact information: <a href="mailto:lchiang2@my.centennialcollege.ca">lchiang2@my.centennialcollege.ca</a>.</p>
-        <p>Course name: Advanced Web Application Development - COMP229 - SEC 001 </p>
-    </footer>
+        </div>
+
+        <!-- Menu -->
+        <div>
+            <asp:LoginView ID="loginView" runat="server">
+                <LoggedInTemplate>
+                    <asp:LoginName ID="loginName" runat="server"
+                        FormatString="Hello, {0}!" />
+                    (<asp:LoginStatus ID="loginStatus" runat="server" />)
+    
+                </LoggedInTemplate>
+                <AnonymousTemplate>
+                    <asp:LoginStatus ID="loginStatus" runat="server" />
+                </AnonymousTemplate>
+            </asp:LoginView>
+        </div>
+        <!-- Content -->
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer id="footer">
+            <p>Posted by: Lisa Chiang</p>
+            <p>Centennial College student number: 300925122</p>
+            <p>Contact information: <a href="mailto:lchiang2@my.centennialcollege.ca">lchiang2@my.centennialcollege.ca</a>.</p>
+            <p>Course name: Advanced Web Application Development - COMP229 - SEC 001 </p>
+        </footer>
+    </form>
 </body>
 </html>

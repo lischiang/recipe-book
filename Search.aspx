@@ -9,7 +9,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
-    <form runat="server">
+    <%--<form runat="server">--%>
         <div class="recipecontainer">
             <table style="margin-left: auto; margin-right: auto; max-width: 600px">
                 <tr style="text-align: center">
@@ -70,7 +70,7 @@
                 </Columns>
             </asp:GridView>
         </div>
-    </form>
+    <%--</form>--%>
 </asp:Content>
 
 

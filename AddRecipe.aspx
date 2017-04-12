@@ -13,8 +13,9 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" runat="Server">
 
     <%--Form to add a new recipe--%>
-    <form runat="server" style="align-content: center">
+    <%--<form runat="server" style="align-content: center">--%>
         <div class="recipecontainer">
+            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
             <table style="margin-left: auto; margin-right: auto; max-width: 1000px; max-height: none">
                 <tr>
                     <%--Header of the form--%>
@@ -229,7 +230,7 @@
             <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
         </div>
         
-    </form>
+    <%--</form>--%>
 </asp:Content>
 
 
