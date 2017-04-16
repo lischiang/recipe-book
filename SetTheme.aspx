@@ -8,16 +8,16 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder2" Runat="Server">
-    <%--<form runat="server">--%>
-        <p>Set the web site theme: 
-            <asp:RadioButtonList ID="RadioButtonSetTheme" runat="server" 
-                RepeatDirection="Horizontal" RepeatLayout="Table">
-                <asp:ListItem Text="Light" Value="Light" Selected="True"></asp:ListItem>
-                <asp:ListItem Text="Dark" Value="Dark"></asp:ListItem>
-            </asp:RadioButtonList> 
-        </p>
+
+    <p>Set the web site theme: 
+        <asp:RadioButtonList ID="RadioButtonSetTheme" runat="server" 
+            RepeatDirection="Horizontal" RepeatLayout="Table">
+            <asp:ListItem Text="Light" Value="Light" Selected="True"></asp:ListItem>
+            <asp:ListItem Text="Dark" Value="Dark"></asp:ListItem>
+        </asp:RadioButtonList> 
+    </p>
          
-        <asp:button ID="ButtonConfirmSetTheme" runat="server" text="Confirm" OnClick="ButtonConfirmSetTheme_Click" />
-   <%--</form>--%>      
+    <asp:button ID="ButtonConfirmSetTheme" runat="server" text="Confirm" OnClick="ButtonConfirmSetTheme_Click" />
+    
 </asp:Content>
 

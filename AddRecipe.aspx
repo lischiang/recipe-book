@@ -196,10 +196,17 @@
                             <asp:Button ID="NewRecipeButton" runat="server" Text="Save" 
                                 Height="50" Width="150" OnClick="NewRecipeButton_Click" 
                                 ValidationGroup="MissingFields"/>
+                        </div>                      
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td colspan="3" style="display: flex">
+                        <div style="margin-left: 10px">
+                            <%--Send email checkbox--%>
+                            <asp:CheckBox ID="CheckBoxSendEmail" runat="server" text="Send confirmation email"/>
                         </div>
                     </td>
                 </tr>
-
             </table>
 
             <%--Data source for users drop down list

@@ -17,8 +17,6 @@ public partial class AddRecipe : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-
         // Bind the gridview of the ingredients to the list of ingredients
         List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
         //newListOfIngredients.Clear();
@@ -281,7 +279,39 @@ public partial class AddRecipe : System.Web.UI.Page
                     }
 
                 }
-                Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
+
+                // If the user selected the option, send the user an email with the summary of the added recipe
+                if (CheckBoxSendEmail.Checked)
+                {
+                    // Create command 
+                    comm = new SqlCommand(
+                        "SELECT eMail FROM RB_User WHERE idUser = @idUser", conn);
+                    // Add the idUser parameter
+                    comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
+                    comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
+                    try
+                    {
+                        // Open the connection
+                        conn.Open();
+                        reader = comm.ExecuteReader();
+                        reader.Read();
+                        string userEmail = reader.GetString(0);
+                        MessageLabel.Text = userEmail;
+                        reader.Close();
+                    }
+                    catch
+                    {
+                        MessageLabel.Text = "Error: user's email not found";
+                    }
+                    finally
+                    {
+                        // Close the connection
+                        conn.Close();
+                    }
+
+                }
+
+                //Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
             }
             catch
             {
@@ -308,11 +338,12 @@ public partial class AddRecipe : System.Web.UI.Page
     // Set the theme
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        string theme = (string)Session["theme"];
+        HttpCookie cookie;
+        cookie = Request.Cookies["theme"];
 
-        if (theme != null)
+        if (cookie != null)
         {
-            Page.Theme = theme;
+            Page.Theme = cookie.Value;
         }
         else
         {

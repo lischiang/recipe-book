@@ -5,21 +5,21 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class FAQ : System.Web.UI.Page
+public partial class UserProfile : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
     }
-
     // Set the theme
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        string theme = (string)Session["theme"];
+        HttpCookie cookie;
+        cookie = Request.Cookies["theme"];
 
-        if (theme != null)
+        if (cookie != null)
         {
-            Page.Theme = theme;
+            Page.Theme = cookie.Value;
         }
         else
         {

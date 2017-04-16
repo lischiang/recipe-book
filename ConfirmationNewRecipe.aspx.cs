@@ -15,11 +15,12 @@ public partial class ConfirmationNewRecipe : System.Web.UI.Page
     // Set the theme
     protected void Page_PreInit(object sender, EventArgs e)
     {
-        string theme = (string)Session["theme"];
+        HttpCookie cookie;
+        cookie = Request.Cookies["theme"];
 
-        if (theme != null)
+        if (cookie != null)
         {
-            Page.Theme = theme;
+            Page.Theme = cookie.Value;
         }
         else
         {

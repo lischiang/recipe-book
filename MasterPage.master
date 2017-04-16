@@ -20,7 +20,7 @@
                 <li style="width: 20%"><a href="Recipes.aspx">Recipes</a></li>
                 <li style="width: 20%"><a href="AddRecipe.aspx">Add new recipe</a></li>
                 <li style="width: 20%"><a href="Search.aspx">Search</a></li>
-                <li style="width: 20%"><a href="FAQ.aspx">FAQ</a></li>
+                <li style="width: 20%"><a href="UserProfile.aspx">Your Profile</a></li>
             </ul>
 
         </div>
