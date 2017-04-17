@@ -277,6 +277,11 @@ public partial class AddRecipe : System.Web.UI.Page
                     {
                         MessageLabel.Text = "Error submitting the recipe. Try again!";
                     }
+                    finally
+                    {
+                        // Close the connection
+                        conn.Close();
+                    }
 
                 }
 
@@ -291,18 +296,15 @@ public partial class AddRecipe : System.Web.UI.Page
                     comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
                     try
                     {
-                        // Open the connection
                         conn.Open();
-                        reader = comm.ExecuteReader();
-                        reader.Read();
-                        string userEmail = reader.GetString(0);
-                        MessageLabel.Text = userEmail;
-                        reader.Close();
+                        string emailUser = (string)comm.ExecuteScalar();
+                        MessageLabel.Text = emailUser;
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageLabel.Text = "Error: user's email not found";
+                        MessageLabel.Text = ex.Message;
                     }
+
                     finally
                     {
                         // Close the connection
@@ -326,6 +328,11 @@ public partial class AddRecipe : System.Web.UI.Page
                 newListOfIngredients.Clear();
             }
         }
+
+    }
+
+    public void SendRecipeEmail(string email)
+    {
 
     }
 
