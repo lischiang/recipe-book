@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -298,7 +299,23 @@ public partial class AddRecipe : System.Web.UI.Page
                     {
                         conn.Open();
                         string emailUser = (string)comm.ExecuteScalar();
-                        MessageLabel.Text = emailUser;
+                        string subject = "You have successfully added a New Recipe!";
+                        string body = "";
+                        body += "You have successfully added a New Recipe to your Recipe Book!";
+                        body += "\n\nHere is the details of your recipe:";
+                        body += "\nTitle of the Recipe: " + newRecipe.NameRecipe;
+                        body += "\nPreparation Time: " + preparationTimeArray[0] * 60 + preparationTimeArray[1];
+                        body += "\nNumber of Servings: " + newRecipe.NumberOfServings;
+                        body += "\nDescription: " + newRecipe.Description;
+                        body += "\nCategory: " + DropDownListCategory.SelectedItem;
+                        body += "\n\nList of the Ingredients: ";
+                        foreach (Ingredient ingred in newRecipe.IngredientList)
+                        {
+                            body += "\n- " + ingred.Quantity + " " + ingred.NameUnitOfMeasure + " of " +
+                                ingred.NameIngredient; 
+                        }
+                        body += "\n\nTHANKS FOR USING RECIPE BOOK!";
+                        SendEmail(emailUser, subject, body);
                     }
                     catch (Exception ex)
                     {
@@ -331,11 +348,43 @@ public partial class AddRecipe : System.Web.UI.Page
 
     }
 
-    public void SendRecipeEmail(string email)
+
+    protected void SendEmail(string email, string subject, string body)
     {
+        SmtpClient smtpClient = new SmtpClient();
+        MailMessage message = new MailMessage();
+        try
+        {
+            // Prepare two email addresses 
+            MailAddress fromAddress = new MailAddress(
+                "from@example.com", "Recipe Book");   // the email account that will appear to send the email 
+            MailAddress toAddress = new MailAddress(
+                email, "You");    // the email account that receives the email, name of the person that receives email
+                                  // Prepare the mail message
 
+            message.IsBodyHtml = false;
+            message.From = fromAddress;
+            message.To.Add(toAddress);
+            message.Subject = subject;
+            message.Body = body;
+            // Set server details
+            smtpClient.Host = "smtp.gmail.com";
+            smtpClient.EnableSsl = true;
+            smtpClient.Port = 587;
+            // For SMTP servers that require authentication
+            smtpClient.Credentials = new System.Net.NetworkCredential(
+                "cencoltest2@gmail.com", "zzzzxxxx");  // the email account that sends the email (to authenticate on the gmail server as a user to use their service)
+                                                      // Send the email
+            smtpClient.Send(message);
+            // Inform the user
+            MessageLabel.Text = "Email sent.";
+        }
+        catch (Exception ex)
+        {
+            // Display error message
+            MessageLabel.Text = "Coudn't send the message!";
+        }
     }
-
 
     protected void Reset_Click(object sender, EventArgs e)
     {

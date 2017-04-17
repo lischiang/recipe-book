@@ -15,18 +15,18 @@
       <td>E-mail Address:</td>
       <td><asp:Label ID="LabelEmail" runat="server" Text=""></asp:Label></td>        
     </tr>
-    <tr>
+    <%--<tr>
       <td>Receive news by email:</td>     
       <td><asp:RadioButtonList ID="RadioButtonReceiveEmail" runat="server" RepeatDirection="Horizontal" RepeatLayout="Table">
             <asp:ListItem Text="Yes" Value="Yes" Selected="True"></asp:ListItem>
             <asp:ListItem Text="No" Value="No"></asp:ListItem>
           </asp:RadioButtonList></td>       
-    </tr>
+    </tr>--%>
     <tr>
       <td><a href="ChangePassword.aspx">Change Password</a></td>      
     </tr>
   </table>
     <br />
-    <asp:Button ID="ConfirmButton" runat="server" Text="Confirm Changes" />
+    <%--<asp:Button ID="ConfirmButton" runat="server" Text="Confirm Changes" />--%>
 </asp:Content>
 
