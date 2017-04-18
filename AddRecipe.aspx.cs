@@ -62,7 +62,7 @@ public partial class AddRecipe : System.Web.UI.Page
                     IngredientWebUserControl0.DDLName.DataValueField = "idIngredient";
                     IngredientWebUserControl0.DDLName.DataBind();
                     // Add default item 
-                    IngredientWebUserControl0.DDLName.Items.Insert(0, new ListItem("--Select ingredient--"));
+                    //IngredientWebUserControl0.DDLName.Items.Insert(0, new ListItem("--Select ingredient--"));
 
                     // Get data about ingredients from the database
                     SqlDataAdapter adapterUnits = new SqlDataAdapter("SELECT idUnit, UnitName FROM RB_MeasureUnit", conn);
@@ -74,7 +74,7 @@ public partial class AddRecipe : System.Web.UI.Page
                     IngredientWebUserControl0.DDLUnit.DataValueField = "idUnit";
                     IngredientWebUserControl0.DDLUnit.DataBind();
                     // Add default item 
-                    IngredientWebUserControl0.DDLUnit.Items.Insert(0, new ListItem("--Select measure unit--"));
+                    //IngredientWebUserControl0.DDLUnit.Items.Insert(0, new ListItem("--Select measure unit--"));
 
                     // Get data about users from the database
                     SqlDataAdapter adapterUsers = new SqlDataAdapter("SELECT idUser, UserName FROM RB_User", conn);
@@ -134,216 +134,195 @@ public partial class AddRecipe : System.Web.UI.Page
 
     protected void NewRecipeButton_Click(object sender, EventArgs e)
     {
-        // Check if all the ingredients have a name
-
-        bool ingredientTxtValid = true;
-
-        // IngredientWebUserControl0
-        if (IngredientWebUserControl0.Quantity != "" || 
-            IngredientWebUserControl0.DDLUnit.SelectedIndex != 0)
+        // Save the preparation/cooking time selected by the user
+        int[] preparationTimeArray = new int[2];
+        if (PrepareTimeHoursDropDownList.SelectedIndex == 0 &&
+            PrepareTimeMinutesDropDownList.SelectedIndex != 0)
+        // in case the user selects just N minutes we set the time 0h Nmin
         {
-            if (IngredientWebUserControl0.DDLName.SelectedIndex == 0)
-            {
-                ingredientTxtValid = false;
-            }
+            preparationTimeArray[0] = 0;
+            preparationTimeArray[1] = Convert.ToInt32(
+                PrepareTimeMinutesDropDownList.SelectedValue);
+        }
+        else if (PrepareTimeHoursDropDownList.SelectedIndex != 0 &&
+            PrepareTimeMinutesDropDownList.SelectedIndex == 0)
+        // in case the user selects just N hours we set the time Nh 0min
+        {
+            preparationTimeArray[0] = Convert.ToInt32(
+                PrepareTimeHoursDropDownList.SelectedValue);
+            preparationTimeArray[1] = 0;
+        }
+        else if (PrepareTimeHoursDropDownList.SelectedIndex == 0 &&
+            PrepareTimeMinutesDropDownList.SelectedIndex == 0)
+        // in case the user has not selected anything we set the time at 0h 0min
+        {
+            preparationTimeArray[0] = 0; preparationTimeArray[1] = 0;
+        }
+        else
+        // in case both dropdownlists have been selected we save both the selected hours and minutes
+        {
+            preparationTimeArray[0] = Convert.ToInt32(
+                PrepareTimeHoursDropDownList.SelectedValue);
+            preparationTimeArray[1] = Convert.ToInt32(
+                PrepareTimeMinutesDropDownList.SelectedValue);
         }
 
-        // if the web user control for the ingredients has the name missing, we do not save the recipe
-        if (ingredientTxtValid)
+        //// Recover the list of Ingredients
+        List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
+
+        // get category
+        string indexCategory = DropDownListCategory.SelectedValue;
+
+        // Create new recipe class instance
+        Recipe newRecipe = new Recipe
         {
-            // Save the preparation/cooking time selected by the user
-            int[] preparationTimeArray = new int[2];
-            if (PrepareTimeHoursDropDownList.SelectedIndex == 0 &&
-                PrepareTimeMinutesDropDownList.SelectedIndex != 0)
-            // in case the user selects just N minutes we set the time 0h Nmin
+            NameRecipe = NameRecipeText.Text,
+            SubmittedBy = SubmittedByDropDownList.SelectedItem.ToString(),
+            IndexSubmittedBy = SubmittedByDropDownList.SelectedValue,
+            IndexCategory = indexCategory,
+            PrepareTime = preparationTimeArray[0] + "h " + preparationTimeArray[1] + "min",
+            NumberOfServings = Convert.ToInt32(NumberOfServingsText.Text),
+            Description = RecipeDescriptionText.Text,
+            IngredientList = newListOfIngredients
+        };
+
+        ((List<Recipe>)Application["recipes"]).Add(newRecipe);    // add new recipe instance to the list of recipes
+
+        // Create connnection to RB_RecipeBook database
+        SqlConnection conn;
+        SqlCommand comm;
+        SqlDataReader reader;
+        // Read the connection string from Web.config
+        string connectionString =
+            ConfigurationManager.ConnectionStrings["RB_RecipeBook"].ConnectionString;
+        conn = new SqlConnection(connectionString);
+
+        // Create sql command with insert statement
+        comm = new SqlCommand("INSERT RB_Recipe (RecipeName, PrepareMinutes, NumberServings, " +
+        "RecipeDescription, idCategory, idUser) " +
+        "VALUES(@RecipeName, @PrepareMinutes, @NumberServings, " +
+        "@RecipeDescription, @idCategory, @idUser);", conn);
+
+        comm.Parameters.Add("@RecipeName", System.Data.SqlDbType.NVarChar);
+        comm.Parameters["@RecipeName"].Value = newRecipe.NameRecipe;
+        comm.Parameters.Add("@PrepareMinutes", System.Data.SqlDbType.Int);
+        comm.Parameters["@PrepareMinutes"].Value = preparationTimeArray[0] * 60 + preparationTimeArray[1];
+        comm.Parameters.Add("@NumberServings", System.Data.SqlDbType.Int);
+        comm.Parameters["@NumberServings"].Value = newRecipe.NumberOfServings;
+        comm.Parameters.Add("@RecipeDescription", System.Data.SqlDbType.NVarChar);
+        comm.Parameters["@RecipeDescription"].Value = newRecipe.Description;
+        comm.Parameters.Add("@idCategory", System.Data.SqlDbType.Int);
+        comm.Parameters["@idCategory"].Value = !string.IsNullOrEmpty(newRecipe.IndexCategory) ?
+            Convert.ToInt32(newRecipe.IndexCategory) : (object)DBNull.Value;
+        comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
+        comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
+
+        try
+        {
+            conn.Open();
+            comm.ExecuteNonQuery();
+
+            // get the index on the new recipe just created
+            comm = new SqlCommand(
+                "SELECT MAX(idRecipe) FROM RB_Recipe;", conn);
+            int maxRecipeIndex = 0;
+            var returnValue = comm.ExecuteScalar();
+            if (returnValue != null)
             {
-                preparationTimeArray[0] = 0;
-                preparationTimeArray[1] = Convert.ToInt32(
-                    PrepareTimeMinutesDropDownList.SelectedValue);
+                maxRecipeIndex = Convert.ToInt32(returnValue);
             }
-            else if (PrepareTimeHoursDropDownList.SelectedIndex != 0 &&
-                PrepareTimeMinutesDropDownList.SelectedIndex == 0)
-            // in case the user selects just N hours we set the time Nh 0min
+
+            // for each ingredient, we create a record in the RecipeIngredient table
+            foreach(Ingredient ingred in newRecipe.IngredientList)
             {
-                preparationTimeArray[0] = Convert.ToInt32(
-                    PrepareTimeHoursDropDownList.SelectedValue);
-                preparationTimeArray[1] = 0;
+                // Create sql command with insert statement
+                comm = new SqlCommand("INSERT RB_RecipeIngredient (idRecipe, idIngredient, idUnit, Quantity) " +
+                "VALUES(@idRecipe, @idIngredient, @idUnit, @Quantity);" , conn);
+
+                // Create parameters
+                comm.Parameters.Add("@idRecipe", System.Data.SqlDbType.Int);
+                comm.Parameters["@idRecipe"].Value = maxRecipeIndex;
+                comm.Parameters.Add("@idIngredient", System.Data.SqlDbType.Int);
+                comm.Parameters["@idIngredient"].Value = Convert.ToInt32(ingred.IndexIngredient);
+                comm.Parameters.Add("@idUnit", System.Data.SqlDbType.Int);
+                comm.Parameters["@idUnit"].Value = Convert.ToInt32(ingred.IndexUnitOfMeasure);
+                comm.Parameters.Add("@Quantity", System.Data.SqlDbType.Float);
+                comm.Parameters["@Quantity"].Value = ingred.Quantity;
+
+                try
+                {
+                    // Execute the command
+                    comm.ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageLabel.Text = "Error submitting the recipe. Try again!";
+                }
+                finally
+                {
+                    // Close the connection
+                    conn.Close();
+                }
+
             }
-            else if (PrepareTimeHoursDropDownList.SelectedIndex == 0 &&
-                PrepareTimeMinutesDropDownList.SelectedIndex == 0)
-            // in case the user has not selected anything we set the time at 0h 0min
+
+            // If the user selected the option, send the user an email with the summary of the added recipe
+            if (CheckBoxSendEmail.Checked)
             {
-                preparationTimeArray[0] = 0; preparationTimeArray[1] = 0;
-            }
-            else
-            // in case both dropdownlists have been selected we save both the selected hours and minutes
-            {
-                preparationTimeArray[0] = Convert.ToInt32(
-                    PrepareTimeHoursDropDownList.SelectedValue);
-                preparationTimeArray[1] = Convert.ToInt32(
-                    PrepareTimeMinutesDropDownList.SelectedValue);
-            }
-
-            //// Recover the list of Ingredients
-            List<Ingredient> newListOfIngredients = (List<Ingredient>)Application["ingredients"];
-
-            // get category
-            string indexCategory = "";
-            if (DropDownListCategory.SelectedValue != "--Select ingredient--")
-            {
-                indexCategory = DropDownListCategory.SelectedValue;
-            }
-
-            Recipe newRecipe = new Recipe
-            {
-                NameRecipe = NameRecipeText.Text,
-                SubmittedBy = SubmittedByDropDownList.SelectedItem.ToString(),
-                IndexSubmittedBy = SubmittedByDropDownList.SelectedValue,
-                IndexCategory = indexCategory,
-                PrepareTime = preparationTimeArray[0] + "h " + preparationTimeArray[1] + "min",
-                NumberOfServings = Convert.ToInt32(NumberOfServingsText.Text),
-                Description = RecipeDescriptionText.Text,
-                IngredientList = newListOfIngredients
-            };
-
-            ((List<Recipe>)Application["recipes"]).Add(newRecipe);    // add new recipe instance to the list of recipes
-
-            // Create connnection to RB_RecipeBook database
-            SqlConnection conn;
-            SqlCommand comm;
-            SqlDataReader reader;
-            // Read the connection string from Web.config
-            string connectionString =
-                ConfigurationManager.ConnectionStrings["RB_RecipeBook"].ConnectionString;
-            conn = new SqlConnection(connectionString);
-
-            // Create sql command with insert statement
-            comm = new SqlCommand("INSERT RB_Recipe (RecipeName, PrepareMinutes, NumberServings, " +
-            "RecipeDescription, idCategory, idUser) " +
-            "VALUES(@RecipeName, @PrepareMinutes, @NumberServings, " +
-            "@RecipeDescription, @idCategory, @idUser);", conn);
-
-            comm.Parameters.Add("@RecipeName", System.Data.SqlDbType.NVarChar);
-            comm.Parameters["@RecipeName"].Value = newRecipe.NameRecipe;
-            comm.Parameters.Add("@PrepareMinutes", System.Data.SqlDbType.Int);
-            comm.Parameters["@PrepareMinutes"].Value = preparationTimeArray[0] * 60 + preparationTimeArray[1];
-            comm.Parameters.Add("@NumberServings", System.Data.SqlDbType.Int);
-            comm.Parameters["@NumberServings"].Value = newRecipe.NumberOfServings;
-            comm.Parameters.Add("@RecipeDescription", System.Data.SqlDbType.NVarChar);
-            comm.Parameters["@RecipeDescription"].Value = newRecipe.Description;
-            comm.Parameters.Add("@idCategory", System.Data.SqlDbType.Int);
-            comm.Parameters["@idCategory"].Value = !string.IsNullOrEmpty(newRecipe.IndexCategory) ?
-                Convert.ToInt32(newRecipe.IndexCategory) : (object)DBNull.Value;
-            comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
-            comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
-
-            try
-            {
-                conn.Open();
-                comm.ExecuteNonQuery();
-
-                // get the index on the new recipe just created
+                // Create command 
                 comm = new SqlCommand(
-                    "SELECT MAX(idRecipe) FROM RB_Recipe;", conn);
-                int maxRecipeIndex = 0;
-                var returnValue = comm.ExecuteScalar();
-                if (returnValue != null)
+                    "SELECT eMail FROM RB_User WHERE idUser = @idUser", conn);
+                // Add the idUser parameter
+                comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
+                comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
+                try
                 {
-                    maxRecipeIndex = Convert.ToInt32(returnValue);
+                    conn.Open();
+                    string emailUser = (string)comm.ExecuteScalar();
+                    string subject = "You have successfully added a New Recipe!";
+                    string body = "";
+                    body += "You have successfully added a New Recipe to your Recipe Book!";
+                    body += "\n\nHERE IS THE DETAILS OF YOUR RECIPE:";
+                    body += "\nTitle of the Recipe: " + newRecipe.NameRecipe;
+                    body += "\nPreparation Time: " + preparationTimeArray[0] * 60 + preparationTimeArray[1];
+                    body += "\nNumber of Servings: " + newRecipe.NumberOfServings;
+                    body += "\nDescription: " + newRecipe.Description;
+                    body += "\nCategory: " + DropDownListCategory.SelectedItem;
+                    body += "\n\nList of the Ingredients: ";
+                    foreach (Ingredient ingred in newRecipe.IngredientList)
+                    {
+                        body += "\n- " + ingred.Quantity + " " + ingred.NameUnitOfMeasure + " of " +
+                            ingred.NameIngredient; 
+                    }
+                    body += "\n\nTHANKS FOR USING RECIPE BOOK!";
+                    SendEmail(emailUser, subject, body);
+                }
+                catch (Exception ex)
+                {
+                    MessageLabel.Text = ex.Message;
                 }
 
-                // for each ingredient, we create a record in the RecipeIngredient table
-                foreach(Ingredient ingred in newRecipe.IngredientList)
+                finally
                 {
-                    // Create sql command with insert statement
-                    comm = new SqlCommand("INSERT RB_RecipeIngredient (idRecipe, idIngredient, idUnit, Quantity) " +
-                    "VALUES(@idRecipe, @idIngredient, @idUnit, @Quantity);" , conn);
-
-                    // Create parameters
-                    comm.Parameters.Add("@idRecipe", System.Data.SqlDbType.Int);
-                    comm.Parameters["@idRecipe"].Value = maxRecipeIndex;
-                    comm.Parameters.Add("@idIngredient", System.Data.SqlDbType.Int);
-                    comm.Parameters["@idIngredient"].Value = Convert.ToInt32(ingred.IndexIngredient);
-                    comm.Parameters.Add("@idUnit", System.Data.SqlDbType.Int);
-                    comm.Parameters["@idUnit"].Value = Convert.ToInt32(ingred.IndexUnitOfMeasure);
-                    comm.Parameters.Add("@Quantity", System.Data.SqlDbType.Float);
-                    comm.Parameters["@Quantity"].Value = ingred.Quantity;
-
-                    try
-                    {
-                        // Execute the command
-                        comm.ExecuteNonQuery();
-                    }
-                    catch
-                    {
-                        MessageLabel.Text = "Error submitting the recipe. Try again!";
-                    }
-                    finally
-                    {
-                        // Close the connection
-                        conn.Close();
-                    }
-
+                    // Close the connection
+                    conn.Close();
                 }
 
-                // If the user selected the option, send the user an email with the summary of the added recipe
-                if (CheckBoxSendEmail.Checked)
-                {
-                    // Create command 
-                    comm = new SqlCommand(
-                        "SELECT eMail FROM RB_User WHERE idUser = @idUser", conn);
-                    // Add the idUser parameter
-                    comm.Parameters.Add("@idUser", System.Data.SqlDbType.Int);
-                    comm.Parameters["@idUser"].Value = Convert.ToInt32(newRecipe.IndexSubmittedBy);
-                    try
-                    {
-                        conn.Open();
-                        string emailUser = (string)comm.ExecuteScalar();
-                        string subject = "You have successfully added a New Recipe!";
-                        string body = "";
-                        body += "You have successfully added a New Recipe to your Recipe Book!";
-                        body += "\n\nHere is the details of your recipe:";
-                        body += "\nTitle of the Recipe: " + newRecipe.NameRecipe;
-                        body += "\nPreparation Time: " + preparationTimeArray[0] * 60 + preparationTimeArray[1];
-                        body += "\nNumber of Servings: " + newRecipe.NumberOfServings;
-                        body += "\nDescription: " + newRecipe.Description;
-                        body += "\nCategory: " + DropDownListCategory.SelectedItem;
-                        body += "\n\nList of the Ingredients: ";
-                        foreach (Ingredient ingred in newRecipe.IngredientList)
-                        {
-                            body += "\n- " + ingred.Quantity + " " + ingred.NameUnitOfMeasure + " of " +
-                                ingred.NameIngredient; 
-                        }
-                        body += "\n\nTHANKS FOR USING RECIPE BOOK!";
-                        SendEmail(emailUser, subject, body);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageLabel.Text = ex.Message;
-                    }
-
-                    finally
-                    {
-                        // Close the connection
-                        conn.Close();
-                    }
-
-                }
-
-                //Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
             }
-            catch
-            {
-                MessageLabel.Text = "Error submitting the recipe. Try again!";
-            }
-            finally
-            {
-                conn.Close();
 
-                // reset application variable ingredients
+            Response.Redirect("ConfirmationNewRecipe.aspx"); // redirect to the confirmation page
+        }
+        catch
+        {
+            MessageLabel.Text = "Error submitting the recipe. Try again!";
+        }
+        finally
+        {
+            conn.Close();
+
+            // reset application variable ingredients
                 
-                newListOfIngredients.Clear();
-            }
+            newListOfIngredients.Clear();
         }
 
     }
