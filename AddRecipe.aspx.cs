@@ -284,7 +284,7 @@ public partial class AddRecipe : System.Web.UI.Page
                     body += "You have successfully added a New Recipe to your Recipe Book!";
                     body += "\n\nHERE IS THE DETAILS OF YOUR RECIPE:";
                     body += "\nTitle of the Recipe: " + newRecipe.NameRecipe;
-                    body += "\nPreparation Time: " + preparationTimeArray[0] * 60 + preparationTimeArray[1];
+                    body += "\nPreparation Time: " + (preparationTimeArray[0] * 60 + preparationTimeArray[1]);
                     body += "\nNumber of Servings: " + newRecipe.NumberOfServings;
                     body += "\nDescription: " + newRecipe.Description;
                     body += "\nCategory: " + DropDownListCategory.SelectedItem;
@@ -320,8 +320,7 @@ public partial class AddRecipe : System.Web.UI.Page
         {
             conn.Close();
 
-            // reset application variable ingredients
-                
+            // reset application variable ingredients             
             newListOfIngredients.Clear();
         }
 

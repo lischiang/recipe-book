@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="_Default" %>
+﻿<%--Lisa Chiang, student number 300925122--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="_Default" %>
 
 <!DOCTYPE html>
 
@@ -19,7 +20,7 @@
         </div> 
         
         <div>
-            <asp:Login ID="LoginRecipeBook" runat="server"></asp:Login>
+            <asp:Login ID="LoginRecipeBook" runat="server" DisplayRememberMe="False"></asp:Login>
         </div>
         <table style="max-width: 1000px; margin: auto">
         <tr style="height: 400px">
@@ -55,3 +56,4 @@
     </form>
 </body>
 </html>
+<%--Lisa Chiang, student number 300925122--%>
